@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ScalaCompilerConfiguration">
-    <profile name="sbt 1" modules="finalprojectv2-rayxiang03_3968,scalaFXIntro" />
+    <profile name="sbt 1" modules="finalprojectv2-rayxiang03_3968" />
+    <profile name="sbt 2" modules="scalaFXIntro">
+      <plugins>
+        <plugin path="C:\Users\aroon\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalamacros\paradise_2.12.19\2.1.1\paradise_2.12.19-2.1.1.jar" />
+      </plugins>
+    </profile>
   </component>
 </project>
