@@ -16,13 +16,16 @@ trait Database {
 
 
 }
+
+// This object is used to setup the database and check if the database is already initialized
 object Database extends Database{
   def setupDB() = {
     if (!hasDBInitialize)
       Person.initializeTable()
   }
-  def hasDBInitialize : Boolean = {
 
+  def hasDBInitialize : Boolean = {
+    // Check if the table "Record" is already created in the database
     DB getTable "Record" match {
       case Some(x) => true
       case None => false
