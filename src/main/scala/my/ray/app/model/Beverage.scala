@@ -1,0 +1,73 @@
+package my.ray.app.model
+
+import scalafx.beans.property.{ObjectProperty, StringProperty}
+import scalafx.scene.image.Image
+
+
+class Beverage(
+                _id: Option[Long],
+                _name: String,
+                _price: Double,
+                _description: String,
+                _stock: Int,
+                _imagePath: Image,
+                _status: String
+              ) extends Product(_id, _name, _price, _description, _stock, _imagePath, _status) with Consumable {
+
+    var productName = new StringProperty(_name)
+    var productPrice = new StringProperty(_price.toString)
+    var productImage: ObjectProperty[Image] = ObjectProperty(_imagePath)
+    var productDescription = new StringProperty(_description)
+
+}
+
+// Companion object for Beverage
+object Beverage{
+
+    val mangoSmoothie: Beverage = new Beverage(
+      Some(1L),
+      "Mango Smoothie",
+      5.99,
+      "A delicious and refreshing mango smoothie",
+      10,
+      new Image(getClass.getResourceAsStream("/images/mango_smoothie.png")),
+      "Active")
+
+    val moccaccino: Beverage = new Beverage(
+      Some(2L),
+      "Moccaccino",
+      4.99,
+      "A delicious and refreshing moccaccino",
+      10,
+      new Image(getClass.getResourceAsStream("/images/moccaccino.png")),
+      "Active")
+
+    val iceLatte: Beverage = new Beverage(
+      Some(3L),
+      "Ice Latte",
+      3.99,
+      "A delicious and refreshing ice latte",
+      10,
+      new Image(getClass.getResourceAsStream("/images/iced-latte.png")),
+      "Active")
+
+    val oatmilkMocha: Beverage = new Beverage(
+      Some(4L),
+      "Oatmilk Mocha",
+      4.99,
+      "A delicious and refreshing oatmilk mocha",
+      10,
+      new Image(getClass.getResourceAsStream("/images/Oatmilk-Mocha-Flash-Brew.png")),
+      "Active")
+
+
+  // List of all predefined beverages
+  val beverages: List[Beverage] = List(mangoSmoothie, moccaccino, iceLatte, oatmilkMocha)
+
+  // Method to get all beverages
+  def getAllBeverages: List[Beverage] = {
+    beverages
+  }
+
+
+}

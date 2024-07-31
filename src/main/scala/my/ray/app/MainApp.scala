@@ -1,7 +1,6 @@
 package my.ray.app
 
 import my.ray.app.util.Database
-
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
@@ -9,12 +8,21 @@ import scalafx.scene.image.Image
 import scalafx.Includes._
 import scalafxml.core.{FXMLLoader, FXMLView, NoDependencyResolver}
 import javafx.{scene => jfxs}
+import my.ray.app.model.Beverage
+import my.ray.app.view.ProductCardController
+import scalafx.collections.ObservableBuffer
+import scalafx.stage.{Modality, Stage, StageStyle}
 
 
 
 object MainApp extends JFXApp {
 
   Database.setupDB()
+
+  //Beverages
+  val beverageData = new ObservableBuffer[Beverage]()
+  beverageData ++= Beverage.getAllBeverages
+
 
   //Load RootLayout.fxml
   val rootResource = getClass.getResource("view/RootLayout.fxml")
@@ -55,7 +63,36 @@ object MainApp extends JFXApp {
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(roots)
+  }
 
+  def showBeveragePage()= {
+    val resource = getClass.getResource("view/OrderBeverage.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load();
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+    this.roots.setCenter(roots)
+  }
+
+  def showProductCard(beverage: Beverage): Unit = {
+    val resource = getClass.getResourceAsStream("view/ProductCard.fxml")
+    val loader = new FXMLLoader(null, NoDependencyResolver)
+    loader.load(resource);
+    val roots2  = loader.getRoot[jfxs.Parent]
+    val control = loader.getController[ProductCardController#Controller]
+
+    val dialog = new Stage() {
+      initModality(Modality.ApplicationModal)
+      initOwner(stage)
+      initStyle(StageStyle.Undecorated)
+      scene = new Scene {
+        stylesheets += getClass.getResource("view/Style.css").toString
+        root = roots2
+      }
+    }
+    control.dialogStage = dialog
+    control.beverage = beverage
+    dialog.showAndWait()
+    control.okClicked
   }
 
   showDashboard()

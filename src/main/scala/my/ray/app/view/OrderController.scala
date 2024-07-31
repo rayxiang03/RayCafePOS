@@ -7,4 +7,8 @@ import scalafxml.core.macros.sfxml
 @sfxml
 class OrderController {
 
+    def getBeverage(): Unit = {
+        MainApp.showBeveragePage()
+    }
+
 }
