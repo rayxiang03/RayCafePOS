@@ -1,0 +1,37 @@
+.topBackground-color{
+    -fx-background-color: #BBAFA8;
+}
+
+.navBar:hover{
+    -fx-border-color: #660099;
+    -fx-border-width: 0px 0px 3px 0px;
+    -fx-effect: dropshadow(gaussian, rgba(200, 113, 227, 0.9), 8, 0.5, 0, 0); /* Glow effect */
+}
+
+
+/* Hover effect - text glow */
+.logout_nav:hover {
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.9), 8, 0.5, 0, 0); /* Glow effect */
+    -fx-scale-x: 1.05; /* Slightly enlarge the button */
+    -fx-scale-y: 1.05; /* Slightly enlarge the button */
+}
+
+
+.logo:hover {
+    -fx-scale-x: 1.2; /* Slightly enlarge the logo */
+    -fx-scale-y: 1.2; /* Slightly enlarge the logo */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0); /* Shadow effect */
+    -fx-rotate: 5; /* Slight rotation */
+    -fx-z-index: 10;
+}
+
+.orderNav{
+    -fx-background-color: #e4ddd6;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-border-color: #660099;
+    -fx-border-width: 0px 0px 3px 0px;
+    -fx-z-index: 2;
+}
+

@@ -1,6 +1,6 @@
 package my.ray.app.util
 import scalikejdbc._
-
+import my.ray.app.model.Role
 
 trait Database {
   val derbyDriverClassname = "org.apache.derby.jdbc.EmbeddedDriver"
@@ -13,20 +13,17 @@ trait Database {
 
   // ad-hoc session provider on the REPL
   implicit val session = AutoSession
-
-
 }
 
 // This object is used to setup the database and check if the database is already initialized
 object Database extends Database{
   def setupDB() = {
     if (!hasDBInitialize)
-      Person.initializeTable()
+      Role.initializeTable()
   }
-
   def hasDBInitialize : Boolean = {
-    // Check if the table "Record" is already created in the database
-    DB getTable "Record" match {
+
+    DB getTable "Role" match {
       case Some(x) => true
       case None => false
     }
