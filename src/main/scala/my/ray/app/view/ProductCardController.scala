@@ -8,6 +8,7 @@ import my.ray.app.model.Beverage
 import scalafx.Includes._
 import scalafx.scene.control.Label
 import scalafx.stage.Stage
+import my.ray.app.model.Product
 
 
 @sfxml
@@ -21,16 +22,21 @@ class ProductCardController(
 
   var dialogStage: Stage = null
   var okClicked = false
-  private var _beverage: Beverage = null
+  private var _product: Product = null
 
-  def beverage = _beverage
-  def beverage_=(x: Beverage) {
-    _beverage = x
+  def product = _product
+  def product_=(x: Product) {
+    _product = x
 
-    productName.text = _beverage.productName.value
-    productPrice.text = _beverage.productPrice.value
-    productDescription.text = _beverage.productDescription.value
-    productImage.image = _beverage.productImage.value
+    productName.text = _product.nameProperty.value
+    productPrice.text = _product.priceProperty.value
+    productDescription.text = _product.descriptionProperty.value
+    productImage.image = _product.imageProperty.value
   }
+
+  def handleClose(): Unit = {
+    dialogStage.close()
+  }
+
 }
 

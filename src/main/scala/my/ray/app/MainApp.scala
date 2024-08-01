@@ -8,9 +8,11 @@ import scalafx.scene.image.Image
 import scalafx.Includes._
 import scalafxml.core.{FXMLLoader, FXMLView, NoDependencyResolver}
 import javafx.{scene => jfxs}
-import my.ray.app.model.Beverage
-import my.ray.app.view.ProductCardController
+import my.ray.app.model.{Beverage, Dessert, MainCourse, Merchandise, Product, Salad}
+import my.ray.app.view.{ProductCardController}
+import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalafx.collections.ObservableBuffer
+import scalafx.scene.control.{TableColumn, TableView}
 import scalafx.stage.{Modality, Stage, StageStyle}
 
 
@@ -19,9 +21,10 @@ object MainApp extends JFXApp {
 
   Database.setupDB()
 
-  //Beverages
-  val beverageData = new ObservableBuffer[Beverage]()
-  beverageData ++= Beverage.getAllBeverages
+
+  // Observable buffer for products
+  val productData = new ObservableBuffer[Product]()
+
 
 
   //Load RootLayout.fxml
@@ -48,6 +51,7 @@ object MainApp extends JFXApp {
     }
   }
 
+
   def showDashboard(): Unit = {
     val resource = getClass.getResource("view/Dashboard.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
@@ -65,15 +69,29 @@ object MainApp extends JFXApp {
     this.roots.setCenter(roots)
   }
 
-  def showBeveragePage()= {
-    val resource = getClass.getResource("view/OrderBeverage.fxml")
+
+  def showOrderCategory(category: String)= {
+
+    productData.clear() //avoid duplicate looping data
+
+    category match {
+      case "Beverage" =>
+        productData ++= Beverage.getAllBeverages
+
+      case "Dessert" =>
+        productData ++= Dessert.getAllDesserts
+
+    }
+
+    val resource = getClass.getResource("view/ProductCategory.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(roots)
   }
 
-  def showProductCard(beverage: Beverage): Unit = {
+
+  def showProductCard(product: Product): Unit = {
     val resource = getClass.getResourceAsStream("view/ProductCard.fxml")
     val loader = new FXMLLoader(null, NoDependencyResolver)
     loader.load(resource);
@@ -90,10 +108,12 @@ object MainApp extends JFXApp {
       }
     }
     control.dialogStage = dialog
-    control.beverage = beverage
+    control.product = product
     dialog.showAndWait()
     control.okClicked
   }
+
+
 
   showDashboard()
 }

@@ -1,4 +1,4 @@
-/* beverage.css */
+/* category.css */
 
 .table-view {
     -fx-border-color: #D3D3D3;
@@ -44,4 +44,11 @@
 
 .table-view .scroll-bar:vertical .thumb:hover {
     -fx-background-color: #8e7d64; /* Darker color when hovering over the scrollbar thumb */
+}
+
+.table-view .scroll-bar * {
+
+    -fx-min-height: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
 }

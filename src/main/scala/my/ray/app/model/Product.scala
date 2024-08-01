@@ -1,10 +1,6 @@
 package my.ray.app.model
 
-import scalafx.beans.property.{DoubleProperty, IntegerProperty, StringProperty}
-import scalikejdbc._
-
-import scala.util.{Failure, Success, Try}
-import my.ray.app.util.Database
+import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalafx.scene.image.Image
 
 abstract class Product(
@@ -17,4 +13,9 @@ abstract class Product(
                         val status: String
                       ) {
 
+  // Define properties for binding
+  def nameProperty: StringProperty = new StringProperty(name)
+  def priceProperty: StringProperty = new StringProperty(price.toString)
+  def imageProperty: ObjectProperty[Image] = ObjectProperty(imagePath)
+  def descriptionProperty: StringProperty = new StringProperty(description)
 }
