@@ -29,7 +29,6 @@ class ProductController(
   // Set initial items
   orderTable.items = allProducts
 
-
   // Set cell value factories
   prodName.cellValueFactory = _.value.nameProperty
   prodPicture.cellValueFactory = _.value.imageProperty
@@ -66,5 +65,10 @@ class ProductController(
       showProductCard(selectedBeverage)
     }
   }
+
+  def updateTable(category: String): Unit = {
+    prodPicture.text = category;
+  }
+
 }
 

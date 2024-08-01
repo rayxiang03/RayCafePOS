@@ -1,6 +1,6 @@
 package my.ray.app.model
 
-import scalafx.beans.property.{ObjectProperty, StringProperty}
+import scalafx.beans.property.{IntegerProperty, ObjectProperty, StringProperty}
 import scalafx.scene.image.Image
 
 abstract class Product(
@@ -18,4 +18,6 @@ abstract class Product(
   def priceProperty: StringProperty = new StringProperty(price.toString)
   def imageProperty: ObjectProperty[Image] = ObjectProperty(imagePath)
   def descriptionProperty: StringProperty = new StringProperty(description)
+  def stockProperty: IntegerProperty =  IntegerProperty(stock)
+
 }

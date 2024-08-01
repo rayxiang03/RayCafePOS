@@ -8,23 +8,23 @@ import scalafxml.core.macros.sfxml
 class OrderController {
 
     def getBeverage(): Unit = {
-        MainApp.showOrderCategory("Beverage")
+        MainApp.showOrderCategory("Beverages")
     }
 
     def getDesserts(): Unit = {
-        MainApp.showOrderCategory("Dessert")
+        MainApp.showOrderCategory("Desserts")
     }
 
     def getMainCourse(): Unit = {
-        MainApp.showOrderCategory("MainCourse")
+        MainApp.showOrderCategory("Main Courses")
     }
 
     def getSalad(): Unit = {
-        MainApp.showOrderCategory("Salad")
+        MainApp.showOrderCategory("Salads")
     }
 
     def getMerchandise(): Unit = {
-        MainApp.showOrderCategory("Merchandise")
+        MainApp.showOrderCategory("Merchandises")
     }
 
 }

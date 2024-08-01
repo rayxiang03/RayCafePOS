@@ -35,5 +35,18 @@
     -fx-z-index: 2;
 }
 
+.button{
+    -fx-background-insets: 0, 0, 1, 2;
+}
 
+.button:focused {
+    -fx-background-insets: 0, 0, 1, 2;
+}
 
+.exitButton:hover{
+
+    -fx-text-fill: #8e7d64;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+
+}

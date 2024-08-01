@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -18,11 +20,18 @@
                         <Font name="Bernard MT Condensed" size="38.0" />
                      </font>
                   </Label>
-                  <Button layoutX="22.0" layoutY="113.0" mnemonicParsing="false" onAction="#getBeverage" prefHeight="44.0" prefWidth="177.0" styleClass="button_slide" stylesheets="@style.css" text="Beverages" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-                  <Button layoutX="22.0" layoutY="176.0" mnemonicParsing="false" onAction="#getDesserts" prefHeight="44.0" prefWidth="177.0" text="Desserts" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-                  <Button layoutX="22.0" layoutY="241.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="177.0" text="Main Courses" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-                  <Button layoutX="22.0" layoutY="305.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="177.0" text="Salads" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-                  <Button layoutX="22.0" layoutY="369.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="177.0" text="Merchandise" />
+                  <Group accessibleRole="BUTTON" layoutX="20.0" layoutY="113.0" stylesheets="@style.css">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#getBeverage" prefHeight="44.0" prefWidth="180.0" styleClass="button_slide" stylesheets="@style.css" text="Beverages" />
+                        <Button layoutY="63.0" mnemonicParsing="false" onAction="#getDesserts" prefHeight="44.0" prefWidth="180.0" text="Desserts" />
+                        <Button layoutY="128.0" mnemonicParsing="false" onAction="#getMainCourse" prefHeight="44.0" prefWidth="180.0" text="Main Courses" />
+                        <Button layoutY="192.0" mnemonicParsing="false" onAction="#getSalad" prefHeight="44.0" prefWidth="180.0" text="Salads" />
+                        <Button layoutX="2.0" layoutY="256.0" mnemonicParsing="false" onAction="#getMerchandise" prefHeight="44.0" prefWidth="180.0" text="Merchandise" />
+                     </children>
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Group>
                </children>
             </AnchorPane>
          </left>

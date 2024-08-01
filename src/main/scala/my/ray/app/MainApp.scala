@@ -1,19 +1,20 @@
 package my.ray.app
 
 import my.ray.app.util.Database
-import scalafx.application.JFXApp
+import scalafx.application.{JFXApp, Platform}
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.scene.image.Image
 import scalafx.Includes._
-import scalafxml.core.{FXMLLoader, FXMLView, NoDependencyResolver}
+import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 import javafx.{scene => jfxs}
 import my.ray.app.model.{Beverage, Dessert, MainCourse, Merchandise, Product, Salad}
-import my.ray.app.view.{ProductCardController}
-import scalafx.beans.property.{ObjectProperty, StringProperty}
+import my.ray.app.view.{ProductCardController, ProductController}
+import scalafx.animation.ScaleTransition
 import scalafx.collections.ObservableBuffer
-import scalafx.scene.control.{TableColumn, TableView}
+import scalafx.scene.layout.StackPane
 import scalafx.stage.{Modality, Stage, StageStyle}
+import scalafx.util.Duration
 
 
 
@@ -75,12 +76,22 @@ object MainApp extends JFXApp {
     productData.clear() //avoid duplicate looping data
 
     category match {
-      case "Beverage" =>
+      case "Beverages" =>
         productData ++= Beverage.getAllBeverages
 
-      case "Dessert" =>
+      case "Desserts" =>
         productData ++= Dessert.getAllDesserts
 
+      case "Main Courses" =>
+        productData ++= MainCourse.getAllMainCourses
+
+      case "Salads" =>
+        productData ++= Salad.getAllSalads
+
+      case "Merchandises" =>
+        productData ++= Merchandise.getMerchandiseData
+
+      case _ =>
     }
 
     val resource = getClass.getResource("view/ProductCategory.fxml")
@@ -88,29 +99,54 @@ object MainApp extends JFXApp {
     loader.load();
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(roots)
+
+    val controller = loader.getController[ProductController#Controller]
+    controller.updateTable(category)
   }
 
 
   def showProductCard(product: Product): Unit = {
-    val resource = getClass.getResourceAsStream("view/ProductCard.fxml")
-    val loader = new FXMLLoader(null, NoDependencyResolver)
-    loader.load(resource);
-    val roots2  = loader.getRoot[jfxs.Parent]
+    val resource = getClass.getResource("view/ProductCard.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val roots2 = loader.getRoot[jfxs.Parent]
     val control = loader.getController[ProductCardController#Controller]
 
+    // Create a transparent stage to avoid white screen
     val dialog = new Stage() {
       initModality(Modality.ApplicationModal)
       initOwner(stage)
-      initStyle(StageStyle.Undecorated)
+      initStyle(StageStyle.TRANSPARENT) // Transparent stage style
       scene = new Scene {
+        root = new StackPane() {
+          children = roots2
+        }
         stylesheets += getClass.getResource("view/Style.css").toString
-        root = roots2
       }
     }
+
+    // Set initial scale to 0 for the animation
+    roots2.setScaleX(0)
+    roots2.setScaleY(0)
+
+    // Define the scale transition
+    val scaleTransition = new ScaleTransition(Duration(300), roots2) {
+      fromX = 0
+      fromY = 0
+      toX = 1
+      toY = 1
+    }
+
     control.dialogStage = dialog
     control.product = product
-    dialog.showAndWait()
-    control.okClicked
+
+    // Show the dialog with a transparent background
+    dialog.show()
+
+    // Use Platform.runLater to ensure the animation starts after the dialog is shown
+    Platform.runLater {
+      scaleTransition.play()
+    }
   }
 
 
