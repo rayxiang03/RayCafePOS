@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.NavigationController">
+   <children>
+      <BorderPane prefHeight="650.0" prefWidth="1015.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+         <top>
+            <HBox prefHeight="32.0" prefWidth="800.0" styleClass="topBackground-color" stylesheets="@style.css" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="78.0" fitWidth="93.0" onMouseClicked="#getDashboard" pickOnBounds="true" preserveRatio="true" styleClass="logo">
+                     <image>
+                        <Image url="@../../../../images/main_logo.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label prefHeight="78.0" prefWidth="110.0" text="Dashboard" visible="false" />
+                  <HBox alignment="CENTER" prefHeight="76.0" prefWidth="122.0">
+                     <children>
+                        <ButtonBar fx:id="nav_order" onMouseClicked="#getOrder" prefHeight="49.0" prefWidth="140.0" styleClass="navBar" stylesheets="@style.css">
+                           <buttons>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/order_side_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="56.0" prefWidth="65.0" text="Order">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </buttons>
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </ButtonBar>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="206.0">
+                     <children>
+                        <ButtonBar fx:id="nav_history" prefHeight="58.0" prefWidth="190.0" styleClass="navBar" stylesheets="@style.css">
+                           <buttons>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/orderHistory_side_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="56.0" prefWidth="141.0" text="Order History">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </buttons>
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </ButtonBar>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="133.0">
+                     <children>
+                        <ButtonBar fx:id="nav_report" styleClass="navBar" stylesheets="@style.css">
+                           <buttons>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/report_side_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="54.0" prefWidth="99.0" text="Report">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </buttons>
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </ButtonBar>
+                     </children>
+                  </HBox>
+                  <Label prefHeight="78.0" prefWidth="354.0" />
+                  <HBox fx:id="logout_nav" alignment="CENTER_RIGHT" prefHeight="78.0" prefWidth="118.0" styleClass="logout_nav" stylesheets="@style.css">
+                     <children>
+                        <ImageView fitHeight="31.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/logout_icon.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets right="3.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label text="Logout" textFill="#e43b15">
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </HBox>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

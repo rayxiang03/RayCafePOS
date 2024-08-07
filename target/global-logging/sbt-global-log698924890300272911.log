@@ -1,0 +1,11 @@
+[debug] > Exec(dir C:\Users\aroon\IdeaProjects\FinalProject\finalprojectv2-rayxiang03, None, None)
+[error] Expected ID character
+[error] Not a valid command: dir
+[error] Expected project ID
+[error] Expected configuration
+[error] Expected ':'
+[error] Expected key
+[error] Not a valid key: dir (similar: deliver, run, doc)
+[error] dir C:\Users\aroon\IdeaProjects\FinalProject\finalprojectv2-rayxiang03
+[error]    ^
+[debug] > Exec(idea-shell, None, None)
