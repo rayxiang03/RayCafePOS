@@ -3,7 +3,7 @@ package my.ray.app.model
 import scalafx.scene.image.Image
 
 class Merchandise(
-                   _id: Option[Long],
+                   _id: String,
                    _name: String,
                    _price: Double,
                    _description: String,
@@ -17,7 +17,7 @@ class Merchandise(
 
 object Merchandise {
   val personalizeMug: Merchandise = new Merchandise(
-    Some(1L),
+    "Z001",
     "Personalize Mug",
     79.90,
     "Personalize your own mug with your favorite name!",
@@ -26,7 +26,7 @@ object Merchandise {
     "Active")
 
   val notebookSet: Merchandise = new Merchandise(
-    Some(2L),
+    "Z002",
     "Notebook Set",
     49.90,
     "Notebook set with  pencil",

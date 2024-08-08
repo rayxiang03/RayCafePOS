@@ -36,6 +36,7 @@ object MainApp extends JFXApp {
   //Transform path of RootLayout.fxml to URI for resource location.
   val roots = loader.getRoot[jfxs.layout.BorderPane]
 
+
   stage = new PrimaryStage {
     title = "Ray's Cafe"
     minWidth = 1200
@@ -149,7 +150,5 @@ object MainApp extends JFXApp {
     }
   }
 
-
-
-  showDashboard()
+  showDashboard();
 }

@@ -7,7 +7,7 @@ import my.ray.app.util.Database
 import scalafx.scene.image.Image
 
 class Salad(
-             _id: Option[Long],
+             _id: String,
              _name: String,
              _price: Double,
              _description: String,
@@ -20,7 +20,7 @@ class Salad(
 
 object Salad {
   val caesarSalad: Salad = new Salad(
-    Some(6L),
+    "S001",
     "Caesar Salad",
     12.50,
     "Romaine Lettuce, Croutons, Parmesan Cheese, Lemon Juice, Olive Oil, Egg, Worcestershire Sauce, Garlic, Black Pepper, Salt",
@@ -29,7 +29,7 @@ object Salad {
     "Active")
 
   val gardenSalad: Salad = new Salad(
-    Some(7L),
+    "S002",
     "Garden Salad",
     10.50,
     "Lettuce, Tomato, Cucumber, Carrot, Onion, Olive Oil, Lemon Juice, Salt, Black Pepper",
@@ -38,7 +38,7 @@ object Salad {
     "Active")
 
     val pecanberrySalad: Salad = new Salad(
-    Some(8L),
+    "S003",
     "Pecanberry Salad",
     15.50,
     "380 cal. Fresh strawberries and blueberries, candied pecans and grilled chicken, served with Fat-Free Raspberry-Pecan Vinaigrette dressing.",

@@ -3,7 +3,7 @@ package my.ray.app.model
 import scalafx.scene.image.Image
 
 class MainCourse(
-                  _id: Option[Long],
+                  _id: String,
                   _name: String,
                   _price: Double,
                   _description: String,
@@ -16,7 +16,7 @@ class MainCourse(
 
 object MainCourse {
   val chickenParmigiana: MainCourse = new MainCourse(
-    Some(1L),
+    "M001",
     "Chicken Parmigiana",
     26.50,
     "Crispy Chicken Breast with Tomato Sauce and Melted Cheese",
@@ -25,7 +25,7 @@ object MainCourse {
     "Active")
 
   val curryMee: MainCourse = new MainCourse(
-    Some(2L),
+    "M002",
     "Curry Mee",
     24.50,
     "Curry Noodles with Fish Cake, Fishball and Prawn",
@@ -34,7 +34,7 @@ object MainCourse {
     "Active")
 
   val carbonaraBeacon: MainCourse = new MainCourse(
-    Some(3L),
+    "M003",
     "Carbonara Bacon",
     22.50,
     "Creamy Carbonara with Bacon and Mushroom",
@@ -43,7 +43,7 @@ object MainCourse {
     "Active")
 
   val fishAndChips: MainCourse = new MainCourse(
-    Some(4L),
+    "M004",
     "Fish and Chips",
     22.50,
     "Beer Battered Fish with Fries and Tartar Sauce",
@@ -52,7 +52,7 @@ object MainCourse {
     "Active")
 
   val kidMacAndCheese: MainCourse = new MainCourse(
-    Some(5L),
+    "M005",
     "Kid Mac and Cheese",
     9.50,
     "Macaroni with Cheese Sauce and lots of vegetables (kids confirm like it! >_<)",
@@ -61,7 +61,7 @@ object MainCourse {
     "Active")
 
   val seafoodPasta: MainCourse = new MainCourse(
-    Some(6L),
+    "M006",
     "Seafood Pasta",
     26.50,
     "Spaghetti with Prawns, Squid, and Mussels in Tomato Sauce",
@@ -70,7 +70,7 @@ object MainCourse {
     "Active")
 
   val friedRiceWithSatay: MainCourse = new MainCourse(
-    Some(7L),
+    "M007",
     "Fried Rice with Satay",
     22.50,
     "Fried Rice with Chicken Satay and Peanut Sauce",

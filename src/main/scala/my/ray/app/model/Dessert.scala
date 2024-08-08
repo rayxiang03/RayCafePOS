@@ -4,7 +4,7 @@ import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalafx.scene.image.Image
 
 class Dessert(
-               _id: Option[Long],
+               _id: String,
                _name: String,
                _price: Double,
                _description: String,
@@ -22,7 +22,7 @@ class Dessert(
 
   object Dessert {
     val matchamisu: Dessert = new Dessert(
-      Some(1L),
+      "D001",
       "Matchamisu",
       26.50,
       "Vanilla Mascarpone Cream Dusted with Matcha Powder",
@@ -31,7 +31,7 @@ class Dessert(
       "Active")
 
     val chococherrytart: Dessert = new Dessert(
-      Some(2L),
+      "D002",
       "Choco Cherry Tart",
       24.50,
       "Chocolate Tart with Cherry Compote",
@@ -40,7 +40,7 @@ class Dessert(
       "Active")
 
     val rockmelonbingsu: Dessert = new Dessert(
-      Some(3L),
+      "D003",
       "Rockmelon Bingsu",
       22.50,
       "Korean Shaved Ice Dessert with Rockmelon",

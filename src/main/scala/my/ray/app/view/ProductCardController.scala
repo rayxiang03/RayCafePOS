@@ -15,6 +15,7 @@ class ProductCardController(
                              private val productName: Label,
                              private val productPrice: Label,
                              private val productDescription: Label,
+                             private val productStock: Label,
                              private val productSpinner: Spinner[Int]
                            ) {
 
@@ -29,9 +30,10 @@ class ProductCardController(
     _product = x
 
     productName.text = _product.nameProperty.value
-    productPrice.text = _product.priceProperty.value
+    productPrice.text = _product.priceProperty.value.toString
     productDescription.text = _product.descriptionProperty.value
     productImage.image = _product.imageProperty.value
+    productStock.text = _product.stockProperty.value.toString
 
     // Set the Spinner's minimum and maximum values based on the stock variable
     val min = 1

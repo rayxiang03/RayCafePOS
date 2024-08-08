@@ -1,14 +1,14 @@
 package my.ray.app.view
 
 import my.ray.app.MainApp
-
+import scalafx.application.Platform
 import scalafxml.core.macros.sfxml
 
 @sfxml
 class OrderController {
 
     def getBeverage(): Unit = {
-        MainApp.showOrderCategory("Beverages")
+            MainApp.showOrderCategory("Beverages")
     }
 
     def getDesserts(): Unit = {

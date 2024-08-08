@@ -5,7 +5,7 @@ import scalafx.scene.image.Image
 
 
 class Beverage(
-                _id: Option[Long],
+                _id: String,
                 _name: String,
                 _price: Double,
                 _description: String,
@@ -25,7 +25,7 @@ class Beverage(
 object Beverage{
 
     val mangoSmoothie: Beverage = new Beverage(
-      Some(1L),
+      "B001",
       "Mango Smoothie",
       5.99,
       "A delicious and refreshing mango smoothie",
@@ -34,7 +34,7 @@ object Beverage{
       "Active")
 
     val moccaccino: Beverage = new Beverage(
-      Some(2L),
+      "B002",
       "Moccaccino",
       4.99,
       "A delicious and refreshing moccaccino",
@@ -43,7 +43,7 @@ object Beverage{
       "Active")
 
     val iceLatte: Beverage = new Beverage(
-      Some(3L),
+      "B003",
       "Ice Latte",
       3.99,
       "A delicious and refreshing ice latte",
@@ -52,7 +52,7 @@ object Beverage{
       "Active")
 
     val oatmilkMocha: Beverage = new Beverage(
-      Some(4L),
+      "B004",
       "Oatmilk Mocha",
       4.99,
       "A delicious and refreshing oatmilk mocha",

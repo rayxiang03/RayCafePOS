@@ -7,11 +7,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.ProductCardController">
    <children>
-      <ImageView fx:id="productImage" fitHeight="173.0" fitWidth="208.0" layoutX="59.0" layoutY="37.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="productName" alignment="CENTER" layoutX="1.0" prefHeight="31.0" prefWidth="300.0" text="Title" textAlignment="CENTER" textFill="#78b1c7">
+      <ImageView fx:id="productImage" fitHeight="170.0" fitWidth="201.0" layoutX="60.0" layoutY="46.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="productName" alignment="CENTER" layoutY="12.0" prefHeight="31.0" prefWidth="300.0" text="Title" textAlignment="CENTER" textFill="#78b1c7">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -34,5 +33,7 @@
       </Label>
       <Spinner fx:id="productSpinner" editable="true" layoutX="113.0" layoutY="313.0" prefHeight="25.0" prefWidth="60.0" />
       <Button layoutX="184.0" layoutY="313.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="ADD TO ORDER" />
+      <Label layoutX="26.0" layoutY="317.0" text="Stock: " />
+      <Label fx:id="productStock" layoutX="61.0" layoutY="317.0" text="Label" />
    </children>
 </Pane>
