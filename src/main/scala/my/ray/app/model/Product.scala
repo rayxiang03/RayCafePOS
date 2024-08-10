@@ -14,6 +14,7 @@ abstract class Product(
                       ) {
 
   // Define properties for binding
+  def idProperty: StringProperty = new StringProperty(this, "id", id)
   def nameProperty: StringProperty = new StringProperty(this, "name", name)
   def priceProperty: DoubleProperty = new DoubleProperty(this, "price", price)
   def descriptionProperty: StringProperty = new StringProperty(this, "description", description)

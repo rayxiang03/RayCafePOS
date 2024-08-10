@@ -32,7 +32,7 @@
          </font>
       </Label>
       <Spinner fx:id="productSpinner" editable="true" layoutX="113.0" layoutY="313.0" prefHeight="25.0" prefWidth="60.0" />
-      <Button layoutX="184.0" layoutY="313.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="ADD TO ORDER" />
+      <Button fx:id="addOrderBtn" layoutX="184.0" layoutY="313.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="25.0" prefWidth="101.0" text="ADD TO ORDER" />
       <Label layoutX="26.0" layoutY="317.0" text="Stock: " />
       <Label fx:id="productStock" layoutX="61.0" layoutY="317.0" text="Label" />
    </children>

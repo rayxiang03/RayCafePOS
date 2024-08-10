@@ -1,12 +1,13 @@
 package my.ray.app.util
+
 import scalikejdbc._
-import my.ray.app.model.Role
+import my.ray.app.model.{Role, User}
 
 trait Database {
   val derbyDriverClassname = "org.apache.derby.jdbc.EmbeddedDriver"
 
   val dbURL = "jdbc:derby:myDB;create=true;";
-  
+
   Class.forName(derbyDriverClassname)
 
   ConnectionPool.singleton(dbURL, "admin", "admin")
@@ -16,17 +17,26 @@ trait Database {
 }
 
 // This object is used to setup the database and check if the database is already initialized
-object Database extends Database{
-  def setupDB() = {
-    if (!hasDBInitialize)
-      Role.initializeTable()
-  }
-  def hasDBInitialize : Boolean = {
-
-    DB getTable "Role" match {
-      case Some(x) => true
-      case None => false
+object Database extends Database {
+  def setupDB(): Unit = {
+    if (!hasDBInitialize) {
+      // Only initialize if at least one table is missing
+      if (!tableExists("Role")) {
+        Role.initializeTable()
+      }
+      if (!tableExists("User")) {
+        User.initializeTable()
+      }
     }
+  }
 
+  // Checks if the database is initialized by confirming the presence of both tables
+  def hasDBInitialize: Boolean = {
+    tableExists("Role") && tableExists("User")
+  }
+
+  // Utility function to check if a specific table exists
+  private def tableExists(tableName: String): Boolean = {
+    DB.getTable(tableName).isDefined
   }
 }

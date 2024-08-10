@@ -7,7 +7,9 @@ import scalafx.stage.Stage
 import my.ray.app.model.Product
 import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory
-
+import my.ray.app.view.OrderController
+import scalafxml.core.{FXMLLoader, NoDependencyResolver}
+import javafx.{scene => jfxs}
 
 @sfxml
 class ProductCardController(
@@ -16,9 +18,9 @@ class ProductCardController(
                              private val productPrice: Label,
                              private val productDescription: Label,
                              private val productStock: Label,
-                             private val productSpinner: Spinner[Int]
+                             private val productSpinner: Spinner[Int],
+                             private val addOrderBtn: Button,
                            ) {
-
 
   var dialogStage: Stage = null
   var okClicked = false
@@ -69,6 +71,38 @@ class ProductCardController(
     }
   }
 
+
+  def addOrder(): Unit = {
+    val selectedQuantity = productSpinner.getValue
+    if (selectedQuantity <= _product.stockProperty.value) {
+      // Load OrderController using FXMLLoader
+      val resource = getClass.getResource("../view/Order.fxml")
+      val loader = new FXMLLoader(resource, NoDependencyResolver)
+      val root = loader.load[jfxs.Parent]
+      val orderController = loader.getController[OrderController#Controller]
+
+      // Call method on OrderController
+      orderController.addProductToOrder(_product, selectedQuantity)
+
+      val alert = new Alert(AlertType.Information) {
+        initOwner(dialogStage)
+        title = "Success"
+        headerText = "Product Added to Order"
+        contentText = s"${_product.nameProperty.value} has been added with quantity $selectedQuantity."
+      }
+      alert.showAndWait()
+      okClicked = true
+      dialogStage.close()
+    } else {
+      val alert = new Alert(AlertType.Error) {
+        initOwner(dialogStage)
+        title = "Error"
+        headerText = "Insufficient Stock"
+        contentText = s"Cannot add ${_product.nameProperty.value} to the order. Not enough stock."
+      }
+      alert.showAndWait()
+    }
+  }
 
   def handleClose(): Unit = {
     dialogStage.close()

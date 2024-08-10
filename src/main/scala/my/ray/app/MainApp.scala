@@ -12,10 +12,9 @@ import my.ray.app.model.{Beverage, Dessert, MainCourse, Merchandise, Product, Sa
 import my.ray.app.view.{ProductCardController, ProductController}
 import scalafx.animation.ScaleTransition
 import scalafx.collections.ObservableBuffer
-import scalafx.scene.layout.StackPane
+import scalafx.scene.layout.{BorderPane, StackPane}
 import scalafx.stage.{Modality, Stage, StageStyle}
 import scalafx.util.Duration
-
 
 
 object MainApp extends JFXApp {
@@ -27,14 +26,13 @@ object MainApp extends JFXApp {
   val productData = new ObservableBuffer[Product]()
 
 
-
   //Load RootLayout.fxml
   val rootResource = getClass.getResource("view/RootLayout.fxml")
   val loader = new FXMLLoader(rootResource, NoDependencyResolver)
   loader.load()
 
   //Transform path of RootLayout.fxml to URI for resource location.
-  val roots = loader.getRoot[jfxs.layout.BorderPane]
+  val roots: BorderPane = loader.getRoot[jfxs.layout.BorderPane]()
 
 
   stage = new PrimaryStage {
@@ -49,7 +47,6 @@ object MainApp extends JFXApp {
     scene = new Scene {
       stylesheets += getClass.getResource("view/style.css").toString
       root = roots
-
     }
   }
 
@@ -63,7 +60,7 @@ object MainApp extends JFXApp {
   }
 
 
-  def showOrderPage()={
+  def showOrderPage() = {
     val resource = getClass.getResource("view/Order.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();
@@ -72,8 +69,7 @@ object MainApp extends JFXApp {
   }
 
 
-  def showOrderCategory(category: String)= {
-
+  def showOrderCategory(category: String) = {
     productData.clear() //avoid duplicate looping data
 
     category match {
@@ -111,7 +107,8 @@ object MainApp extends JFXApp {
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load()
     val roots2 = loader.getRoot[jfxs.Parent]
-    val control = loader.getController[ProductCardController#Controller]
+    val productCardController = loader.getController[ProductCardController#Controller]
+
 
     // Create a transparent stage to avoid white screen
     val dialog = new Stage() {
@@ -138,8 +135,8 @@ object MainApp extends JFXApp {
       toY = 1
     }
 
-    control.dialogStage = dialog
-    control.product = product
+    productCardController.dialogStage = dialog
+    productCardController.product = product
 
     // Show the dialog with a transparent background
     dialog.show()
@@ -150,5 +147,18 @@ object MainApp extends JFXApp {
     }
   }
 
-  showDashboard();
+
+
+  //  showDashboard();
+  showLogin()
+
+  def showLogin(): Unit = {
+    val resource = getClass.getResource("view/Login.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load();
+    val Loginroots = loader.getRoot[jfxs.layout.AnchorPane]
+    this.roots.setCenter(Loginroots)
+  }
+
+
 }

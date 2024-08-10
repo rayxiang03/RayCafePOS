@@ -1,0 +1,51 @@
+/* Pane styling */
+.pane {
+    -fx-background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0, 0);
+    -fx-transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
+
+/* Login label */
+.label {
+    -fx-text-fill: #333333; /* Dark gray text */
+    -fx-font-weight: bold;
+}
+
+/* Text fields */
+.text-field, .password-field {
+    -fx-background-color: #f2f2f2; /* Light gray background */
+    -fx-border-color: #cccccc; /* Light gray border */
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 8;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #0066cc; /* Blue border when focused */
+    -fx-background-color: white;
+}
+
+/* Login button */
+.button {
+    -fx-background-color: #0066cc;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0.5, 0, 0);
+}
+
+.button:hover {
+    -fx-background-color: #0052a3; /* Darker blue on hover */
+}
+
+.button:pressed {
+    -fx-background-color: #003d80; /* Even darker blue on click */
+}

@@ -29,6 +29,9 @@ class ProductController(
   // Set initial items
   orderTable.items = allProducts
 
+  // Mutable variable to hold the OrderController instance
+  var orderController: OrderController = _
+
   // Set cell value factories
   prodName.cellValueFactory = _.value.nameProperty
   prodPicture.cellValueFactory = _.value.imageProperty
@@ -60,9 +63,9 @@ class ProductController(
 
   // Add mouse click event handler to detect row clicks
   orderTable.onMouseClicked = _ => {
-    val selectedBeverage = orderTable.selectionModel().selectedItem.value
-    if (selectedBeverage != null) {
-      showProductCard(selectedBeverage)
+    val selectedProduct  = orderTable.selectionModel().selectedItem.value
+    if (selectedProduct  != null) {
+      showProductCard(selectedProduct)
     }
   }
 
