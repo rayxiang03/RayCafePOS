@@ -2,6 +2,8 @@ package my.ray.app.view
 
 import javafx.fxml.FXML
 import my.ray.app.MainApp
+import my.ray.app.util.SessionManager
+import scalafx.application.Platform
 import scalafxml.core.macros.sfxml
 import scalafx.scene.control.ButtonBar
 import scalafx.scene.control.Button
@@ -11,13 +13,19 @@ import scalafx.scene.control.Button
 class NavigationController {
 
 
-  def getDashboard()= {
+  def getDashboard() = {
     MainApp.showDashboard()
 
   }
 
-  def getOrder()= {
+  def getOrder() = {
     MainApp.showOrderPage()
   }
 
+  def logout(): Unit = {
+    SessionManager.endSession()
+    Platform.runLater(() => {
+      MainApp.showLogin()
+    })
+  }
 }

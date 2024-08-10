@@ -126,7 +126,7 @@ object User {
       """.execute.apply()
       } catch {
         case e: SQLException if e.getSQLState == "X0Y32" =>
-          println("Table already exists.")
+//          println("Table already exists.")
         case e: SQLException =>
           println(s"SQL Error: ${e.getMessage}")
       }

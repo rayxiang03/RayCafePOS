@@ -40,7 +40,7 @@ object MainApp extends JFXApp {
     minWidth = 1200
     maxWidth = 1200
     minHeight = 650
-    maxWidth = 650
+    maxHeight = 650
 
     icons += new Image(getClass.getResourceAsStream("/images/raycafe_logo.png"))
 
@@ -147,11 +147,6 @@ object MainApp extends JFXApp {
     }
   }
 
-
-
-  //  showDashboard();
-  showLogin()
-
   def showLogin(): Unit = {
     val resource = getClass.getResource("view/Login.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
@@ -159,6 +154,8 @@ object MainApp extends JFXApp {
     val Loginroots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(Loginroots)
   }
+
+  showLogin()
 
 
 }

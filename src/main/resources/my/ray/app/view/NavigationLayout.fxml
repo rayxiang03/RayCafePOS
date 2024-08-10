@@ -12,7 +12,7 @@
 
 <AnchorPane minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.NavigationController">
    <children>
-      <BorderPane prefHeight="650.0" prefWidth="1015.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+      <BorderPane prefHeight="650.0" prefWidth="1015.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <HBox prefHeight="32.0" prefWidth="800.0" styleClass="topBackground-color" stylesheets="@style.css" BorderPane.alignment="CENTER">
                <children>
@@ -46,16 +46,16 @@
                         </ButtonBar>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="206.0">
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="159.0">
                      <children>
-                        <ButtonBar fx:id="nav_history" prefHeight="58.0" prefWidth="190.0" styleClass="navBar" stylesheets="@style.css">
+                        <ButtonBar fx:id="nav_history" prefHeight="58.0" prefWidth="150.0" styleClass="navBar" stylesheets="@style.css">
                            <buttons>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../../images/orderHistory_side_icon.png" />
                                  </image>
                               </ImageView>
-                              <Label prefHeight="56.0" prefWidth="141.0" text="Order History">
+                              <Label prefHeight="56.0" prefWidth="107.0" text="Order History" wrapText="true">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="18.0" />
                                  </font>
@@ -89,7 +89,7 @@
                      </children>
                   </HBox>
                   <Label prefHeight="78.0" prefWidth="354.0" />
-                  <HBox fx:id="logout_nav" alignment="CENTER_RIGHT" prefHeight="78.0" prefWidth="118.0" styleClass="logout_nav" stylesheets="@style.css">
+                  <HBox fx:id="logout_nav" alignment="CENTER_RIGHT" onMouseClicked="#logout" prefHeight="78.0" prefWidth="118.0" styleClass="logout_nav" stylesheets="@style.css">
                      <children>
                         <ImageView fitHeight="31.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>

@@ -2,7 +2,7 @@ package my.ray.app.view
 
 import my.ray.app.MainApp
 import my.ray.app.model.User
-import my.ray.app.model.User.getUserNameByEmail
+import my.ray.app.util.SessionManager
 import scalafx.animation.{FadeTransition, PauseTransition, ScaleTransition, TranslateTransition}
 import scalafx.scene.effect.GaussianBlur
 import scalafx.scene.image.{Image, ImageView}
@@ -11,7 +11,7 @@ import scalafx.util.Duration
 import scalafxml.core.macros.sfxml
 import scalafx.Includes._
 import scalafx.scene.control.Alert.AlertType
-import scalafx.scene.control.{Alert, Button, ButtonType, TextField}
+import scalafx.scene.control.{Alert, ButtonType, TextField}
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.paint.Color
 import scalafx.scene.text.{Font, Text, TextFlow}
@@ -30,6 +30,7 @@ class LoginController(
 
   private var mediaPlayer: MediaPlayer = _
   private val random = new Random()
+  private val sessionManager = SessionManager
 
 
   // Initialize method to set up the video and image animation
@@ -237,8 +238,9 @@ class LoginController(
       showAlert(AlertType.Error, "Password must be at least 8 characters long.")
     } else {
       validateCredentials(email, password) match {
-        case Some(userName) =>
-          showSuccessAlert(userName)
+        case Some(userId) =>
+          SessionManager.startSession(userId)
+          showSuccessAlert(userId)
         case None =>
           showAlert(AlertType.Error, "Invalid email or password.")
       }
@@ -254,17 +256,14 @@ class LoginController(
     }
   }
 
-  // Assuming you have a method to validate email format
   def isValidEmail(email: String): Boolean = {
     email.matches("^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")
   }
 
-  // Assuming you have a method to validate password strength
   def isValidPassword(password: String): Boolean = {
     password.length >= 8
   }
 
-  // Mock method to simulate credential validation against stored data
   def validateCredentials(email: String, password: String): Option[String] = {
     User.findByEmail(email).flatMap { user =>
       if (user.password == password) Some(user.userName) else None
@@ -275,14 +274,14 @@ class LoginController(
     val alert = new Alert(AlertType.Information) {
       initOwner(null)
       title = "Login Successful"
-      headerText = s"Xin chào, $userName!"
+      headerText = s"Hej, $userName!"
       contentText = "Login successful! Click OK to continue to the dashboard."
     }
 
     val result = alert.showAndWait()
     result match {
-      case Some(ButtonType.OK) => MainApp.showDashboard() // Redirect to dashboard on OK
-      case _ => // Handle other button clicks if necessary
+      case Some(ButtonType.OK) => MainApp.showDashboard()
+      case _ =>
     }
   }
 }
