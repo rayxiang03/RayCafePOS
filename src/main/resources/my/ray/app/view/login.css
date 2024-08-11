@@ -49,3 +49,10 @@
 .button:pressed {
     -fx-background-color: #003d80; /* Even darker blue on click */
 }
+
+.logoutMsg {
+    -fx-text-fill: #319831;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
