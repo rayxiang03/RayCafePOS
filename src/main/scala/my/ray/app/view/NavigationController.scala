@@ -5,8 +5,6 @@ import my.ray.app.MainApp
 import my.ray.app.util.SessionManager
 import scalafx.application.Platform
 import scalafxml.core.macros.sfxml
-import scalafx.scene.control.ButtonBar
-import scalafx.scene.control.Button
 
 
 @sfxml
@@ -25,7 +23,7 @@ class NavigationController {
   def logout(): Unit = {
     SessionManager.endSession()
     Platform.runLater(() => {
-      MainApp.showLogin()
+      MainApp.showLogin(logoutSuccessful = true)
     })
   }
 }

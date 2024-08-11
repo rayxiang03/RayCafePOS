@@ -9,8 +9,6 @@ import scalafx.beans.property.{DoubleProperty, IntegerProperty}
 import scalafxml.core.macros.sfxml
 import scalafx.scene.control.{TableColumn, TableView}
 
-import scala.collection.convert.ImplicitConversions.`collection AsScalaIterable`
-
 
 @sfxml
 class OrderController
@@ -20,8 +18,6 @@ class OrderController
   private val quantityColumn: TableColumn[(Product, Int), Int],
   private val priceColumn: TableColumn[(Product, Int), Double]
 ) {
-
-
 
   // List to hold the current order items
   private val currentOrderItems: ObservableBuffer[(Product, Int)] = ObservableBuffer()

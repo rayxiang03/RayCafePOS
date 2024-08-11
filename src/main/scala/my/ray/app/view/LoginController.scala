@@ -11,7 +11,7 @@ import scalafx.util.Duration
 import scalafxml.core.macros.sfxml
 import scalafx.Includes._
 import scalafx.scene.control.Alert.AlertType
-import scalafx.scene.control.{Alert, ButtonType, TextField}
+import scalafx.scene.control.{Alert, ButtonType, Label, TextField}
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.paint.Color
 import scalafx.scene.text.{Font, Text, TextFlow}
@@ -25,20 +25,19 @@ class LoginController(
                        private val imageView: ImageView,
                        private val welcomeTextFlow: TextFlow,
                        private val emailField: TextField,
-                       private val passwordField: TextField
+                       private val passwordField: TextField,
+                       private val logoutMessageLabel: Label
                      ) {
 
   private var mediaPlayer: MediaPlayer = _
   private val random = new Random()
-  private val sessionManager = SessionManager
 
 
   // Initialize method to set up the video and image animation
   initialize()
 
-
   private def initialize(): Unit = {
-    // Setup the video and logo animation
+    clearLogoutMessage()
     setupBackgroundVideo()
     setupLogoAnimation()
     setupHoverEffects()
@@ -64,7 +63,7 @@ class LoginController(
     // Add an onEndOfMedia event handler to replay the video
     mediaPlayer.onEndOfMedia = () => {
       mediaPlayer.seek(javafx.util.Duration.ZERO) // Rewind to the beginning
-      mediaPlayer.play() // Play the video again
+      mediaPlayer.play()
     }
 
     // Set the image for the ImageView
@@ -147,7 +146,7 @@ class LoginController(
     // Create the Text objects
     val mainText = new Text(textToDisplay) {
       font = Font.font("Consolas", 25)
-      fill = Color.White // Change the text color
+      fill = Color.White
     }
 
     val blinkText = new Text(underscore) {
@@ -167,7 +166,7 @@ class LoginController(
     def typeText(index: Int): Unit = {
       if (index <= textToDisplay.length) {
         mainText.text = textToDisplay.substring(0, index)
-        blinkText.opacity = 1.0 // Show underscore
+        blinkText.opacity = 1.0
         new PauseTransition(randomDelay(20, 150)) {
           onFinished = _ => typeText(index + 1)
         }.play()
@@ -230,6 +229,8 @@ class LoginController(
     val email = emailField.text()
     val password = passwordField.text()
 
+    clearLogoutMessage()
+
     if (email.isEmpty || password.isEmpty) {
       showAlert(AlertType.Error, "Username or password cannot be empty.")
     } else if (!isValidEmail(email)) {
@@ -238,9 +239,9 @@ class LoginController(
       showAlert(AlertType.Error, "Password must be at least 8 characters long.")
     } else {
       validateCredentials(email, password) match {
-        case Some(userId) =>
-          SessionManager.startSession(userId)
-          showSuccessAlert(userId)
+        case Some(userName) =>
+          SessionManager.startSession(userName)
+          showSuccessAlert(userName)
         case None =>
           showAlert(AlertType.Error, "Invalid email or password.")
       }
@@ -266,7 +267,8 @@ class LoginController(
 
   def validateCredentials(email: String, password: String): Option[String] = {
     User.findByEmail(email).flatMap { user =>
-      if (user.password == password) Some(user.userName) else None
+      if (user.password == password)
+        Some(user.userName) else None
     }
   }
 
@@ -281,7 +283,16 @@ class LoginController(
     val result = alert.showAndWait()
     result match {
       case Some(ButtonType.OK) => MainApp.showDashboard()
-      case _ =>
+      case _ => MainApp.showDashboard()
     }
   }
+
+  def clearLogoutMessage(): Unit = {
+    logoutMessageLabel.text = ""
+  }
+
+  def displayLogoutMessage(): Unit = {
+    logoutMessageLabel.text = "Logout Successful !"
+  }
+
 }

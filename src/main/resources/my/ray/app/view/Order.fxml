@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.OrderController">
+<AnchorPane minWidth="-Infinity" prefHeight="650.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.OrderController">
    <children>
       <fx:include source="NavigationLayout.fxml" />
       <BorderPane layoutY="107.0" prefHeight="543.0" prefWidth="1200.0" stylesheets="@category.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
@@ -41,14 +41,14 @@
          <right>
             <Pane prefHeight="543.0" prefWidth="332.0" styleClass="orderNav" stylesheets="@style.css" BorderPane.alignment="CENTER">
                <children>
-                  <TableView fx:id="currentOrderTable" layoutX="10.0" layoutY="51.0" prefHeight="354.0" prefWidth="307.0">
+                  <TableView fx:id="currentOrderTable" layoutX="10.0" layoutY="51.0" prefHeight="354.0" prefWidth="296.0">
                     <columns>
-                      <TableColumn fx:id="productColumn" editable="false" prefWidth="158.0" sortable="false" text="Product" />
-                      <TableColumn fx:id="quantityColumn" editable="false" prefWidth="42.0" sortable="false" text="Qty" />
-                        <TableColumn fx:id="priceColumn" editable="false" prefWidth="108.0" sortable="false" text="Price (RM)" />
+                      <TableColumn fx:id="productColumn" editable="false" prefWidth="122.0" resizable="false" sortable="false" text="Product" />
+                      <TableColumn fx:id="quantityColumn" editable="false" prefWidth="61.0" resizable="false" sortable="false" text="Qty" />
+                        <TableColumn fx:id="priceColumn" editable="false" prefWidth="125.0" resizable="false" sortType="DESCENDING" sortable="false" text="Price (RM)" />
                     </columns>
                   </TableView>
-                  <Label layoutX="91.0" layoutY="14.0" text="Current Order" textFill="#6086a8">
+                  <Label layoutX="86.0" layoutY="14.0" text="Current Order" textFill="#6086a8">
                      <font>
                         <Font name="Berlin Sans FB Demi Bold" size="23.0" />
                      </font>

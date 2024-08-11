@@ -9,18 +9,16 @@ import scalafx.Includes._
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 import javafx.{scene => jfxs}
 import my.ray.app.model.{Beverage, Dessert, MainCourse, Merchandise, Product, Salad}
-import my.ray.app.view.{ProductCardController, ProductController}
-import scalafx.animation.ScaleTransition
+import my.ray.app.view.{LoginController, ProductCardController, ProductController}
+import scalafx.animation.{PauseTransition, ScaleTransition}
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.{BorderPane, StackPane}
 import scalafx.stage.{Modality, Stage, StageStyle}
 import scalafx.util.Duration
 
-
 object MainApp extends JFXApp {
 
   Database.setupDB()
-
 
   // Observable buffer for products
   val productData = new ObservableBuffer[Product]()
@@ -147,15 +145,27 @@ object MainApp extends JFXApp {
     }
   }
 
-  def showLogin(): Unit = {
+  def showLogin(logoutSuccessful: Boolean = false): Unit = {
     val resource = getClass.getResource("view/Login.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load();
     val Loginroots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(Loginroots)
+
+    val controller = loader.getController[LoginController#Controller]
+    if (logoutSuccessful) {
+      controller.displayLogoutMessage()
+
+      val pause = new PauseTransition(Duration(3000))
+      pause.setOnFinished(_ => controller.clearLogoutMessage())
+      pause.play()
+
+    } else {
+      controller.clearLogoutMessage()
+    }
   }
 
+  //First Page
   showLogin()
-
 
 }

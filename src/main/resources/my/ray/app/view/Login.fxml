@@ -11,7 +11,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-
 <AnchorPane prefHeight="650.0" prefWidth="1200.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.LoginController">
    <children>
       <MediaView fx:id="mediaView" fitHeight="650.0" fitWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -22,8 +21,8 @@
                   <Font name="STCaiyun" size="45.0" />
                </font>
             </Label>
-            <TextField fx:id="emailField" layoutX="74.0" layoutY="147.0" prefHeight="34.0" prefWidth="259.0" />
-            <PasswordField fx:id="passwordField" layoutX="74.0" layoutY="222.0" prefHeight="34.0" prefWidth="259.0" />
+            <TextField fx:id="emailField" layoutX="74.0" layoutY="147.0" prefHeight="34.0" prefWidth="259.0" text="rx@gmail.com" />
+            <PasswordField fx:id="passwordField" layoutX="74.0" layoutY="222.0" prefHeight="34.0" prefWidth="259.0" text="12345678" />
             <Label layoutX="74.0" layoutY="130.0" text="Email">
                <font>
                   <Font name="OCR A Extended" size="13.0" />
@@ -34,7 +33,8 @@
                   <Font name="OCR A Extended" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="loginButton" layoutX="74.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" prefWidth="259.0" text="Login" />
+            <Button fx:id="loginButton" defaultButton="true" layoutX="74.0" layoutY="321.0" onAction="#handleLogin" pickOnBounds="false" prefHeight="40.0" prefWidth="259.0" text="Login" />
+            <Label fx:id="logoutMessageLabel" layoutX="22.0" layoutY="14.0" prefHeight="17.0" prefWidth="333.0" styleClass="logoutMsg" stylesheets="@login.css" />
          </children>
       </Pane>
       <ImageView fx:id="imageView" fitHeight="253.0" fitWidth="333.0" layoutX="222.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" />

@@ -1,6 +1,5 @@
 package my.ray.app.util
 
-import my.ray.app.MainApp
 
 import scala.collection.mutable
 
@@ -24,7 +23,7 @@ object SessionManager {
     val sessionId = generateSessionId()
     currentSessionId = Some(sessionId)
     sessions(sessionId) = userId
-    println(sessions)
+    println("Current Session: " + sessions)
     sessionId
   }
 
