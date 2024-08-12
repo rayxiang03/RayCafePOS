@@ -1,61 +1,105 @@
 package my.ray.app.view
 
+import javafx.event.ActionEvent
 import my.ray.app.MainApp
 import my.ray.app.model.Product
-import scalafx.Includes.integer2IntegerBinding
-import scalafx.collections.ObservableBuffer
-import scalafx.application.Platform
-import scalafx.beans.property.{DoubleProperty, IntegerProperty}
+import scalafx.beans.property.ObjectProperty
 import scalafxml.core.macros.sfxml
-import scalafx.scene.control.{TableColumn, TableView}
+import scalafx.scene.control.{Button, CheckBox, ContentDisplay, TableCell, TableColumn, TableView}
+import scalafx.scene.text.Text
+import javafx.{scene => jfxs}
 
 
 @sfxml
-class OrderController
-(
-  private val currentOrderTable: TableView[(Product, Int)],
-  private val productColumn: TableColumn[(Product, Int), String],
-  private val quantityColumn: TableColumn[(Product, Int), Int],
-  private val priceColumn: TableColumn[(Product, Int), Double]
-) {
+class OrderController(
+                       private val currentOrderTable: TableView[(Product, Int)],
+                       private val productColumn: TableColumn[(Product, Int), String],
+                       private val quantityColumn: TableColumn[(Product, Int), Int],
+                       private val priceColumn: TableColumn[(Product, Int), String],
+                       private val deleteColumn: TableColumn[(Product, Int), String],
+                       private val subTotal: Text,
+                       private val serviceCharge: Text,
+                       private val sstCharge: Text,
+                       private val total: Text,
+                       private val isTakeAway: CheckBox
+                     ) {
 
-  // List to hold the current order items
-  private val currentOrderItems: ObservableBuffer[(Product, Int)] = ObservableBuffer()
+  private val currentOrderItems = MainApp.currentOrderItems
+  currentOrderTable.items = currentOrderItems
+  isTakeAway.selected = MainApp.isTakeAwayChecked
 
-  def initialize(): Unit = {
-    currentOrderTable.items = currentOrderItems
+  // Recalculate totals whenever the order items change or the checkbox is toggled
+  currentOrderItems.onChange(updateTotals())
+  isTakeAway.selected.onChange(updateTotals())
+
+
+  def handleCategoryChange(event: ActionEvent): Unit = {
+    saveTakeawayStatus()
+    val button = event.getSource.asInstanceOf[jfxs.control.Button]
+    MainApp.showOrderCategory(button.getText)
   }
 
-  def getBeverage(): Unit = {
-    MainApp.showOrderCategory("Beverages")
+  // Save the current state of the takeaway checkbox to MainApp
+  private def saveTakeawayStatus(): Unit = {
+    MainApp.isTakeAwayChecked = isTakeAway.selected.value
   }
 
-  def getDesserts(): Unit = {
-    MainApp.showOrderCategory("Desserts")
+  // Initialize the TableView columns
+  productColumn.cellValueFactory = cellData => ObjectProperty(cellData.value._1.name)
+
+  quantityColumn.cellValueFactory = cellData => ObjectProperty(cellData.value._2)
+
+  priceColumn.cellValueFactory = { cellData =>
+    val totalPrice = cellData.value._1.price * cellData.value._2
+    ObjectProperty(f"$totalPrice%.2f")
   }
 
-  def getMainCourse(): Unit = {
-    MainApp.showOrderCategory("Main Courses")
+  deleteColumn.cellFactory = { _ =>
+    new TableCell[(Product, Int), String] {
+      private val deleteButton = new Button("X")
+
+      deleteButton.onAction = (event: ActionEvent) => {
+        val item = tableRow.value.getItem
+        if (item != null) {
+          currentOrderItems -= item
+        }
+      }
+
+      graphic = deleteButton
+      contentDisplay = ContentDisplay.GraphicOnly
+    }
   }
 
-  def getSalad(): Unit = {
-    MainApp.showOrderCategory("Salads")
+  private def updateTotals(): Unit = {
+    val subtotalValue = currentOrderItems.map { case (product, quantity) =>
+      product.price * quantity
+    }.sum
+
+    val serviceChargeValue = if (isTakeAway.selected.value) 0 else subtotalValue * 0.1
+    val sstValue = subtotalValue * 0.06
+    val totalValue = subtotalValue + serviceChargeValue + sstValue
+
+    subTotal.text = f"$subtotalValue%.2f"
+    serviceCharge.text = f"$serviceChargeValue%.2f"
+    sstCharge.text = f"$sstValue%.2f"
+    total.text = f"$totalValue%.2f"
   }
 
-  def getMerchandise(): Unit = {
-    MainApp.showOrderCategory("Merchandises")
-  }
+  // Bind the TableView to the ObservableBuffer once
+  currentOrderTable.items = currentOrderItems
 
   // Method to add a product to the order
   def addProductToOrder(product: Product, quantity: Int): Unit = {
     val existingItemIndex = currentOrderItems.indexWhere(_._1.id == product.id)
     if (existingItemIndex >= 0) {
+      // Update quantity for existing product
       val (existingProduct, existingQuantity) = currentOrderItems(existingItemIndex)
       currentOrderItems.update(existingItemIndex, (existingProduct, existingQuantity + quantity))
     } else {
+      // Add new product to the order
       currentOrderItems += ((product, quantity))
     }
-    currentOrderTable.refresh() // Ensure the table is refreshed after each modification
   }
 
+  updateTotals()
 }

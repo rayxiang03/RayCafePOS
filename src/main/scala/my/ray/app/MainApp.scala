@@ -22,6 +22,8 @@ object MainApp extends JFXApp {
 
   // Observable buffer for products
   val productData = new ObservableBuffer[Product]()
+  val currentOrderItems = new ObservableBuffer[(Product, Int)]()
+  var isTakeAwayChecked: Boolean = false
 
 
   //Load RootLayout.fxml
