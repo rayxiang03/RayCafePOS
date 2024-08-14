@@ -1,6 +1,5 @@
 package my.ray.app.util
 
-
 import scala.collection.mutable
 
 object SessionManager {

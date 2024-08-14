@@ -44,9 +44,52 @@
 }
 
 .exitButton:hover{
-
     -fx-text-fill: #8e7d64;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-
 }
+
+
+.legendTable {
+    -fx-background-color: #e2e8e8;
+    -fx-border-color: #b0bec5;
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.legendTable .hbox {
+    -fx-spacing: 10;
+    -fx-alignment: center-left;
+}
+
+.legendTable .label {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 11px;
+    -fx-text-fill: #333333;
+}
+
+.legendTable .rectangle {
+    -fx-arc-height: 5;
+    -fx-arc-width: 5;
+    -fx-stroke-width: 0;
+    -fx-width: 32px;
+    -fx-height: 25px;
+}
+
+.legendTable .hbox .label {
+    -fx-padding: 0 0 0 10;
+}
+
+.tablePane {
+    -fx-background-color: #e4ddd6;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-padding: 10;
+}
+
+.currentOrderPane{
+    -fx-background-color: #e4ddd6;
+}
+
+

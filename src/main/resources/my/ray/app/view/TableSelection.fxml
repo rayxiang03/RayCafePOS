@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.TableSelectionController">
+   <children>
+      <fx:include source="NavigationLayout.fxml" />
+      <Pane layoutX="118.0" layoutY="88.0" prefHeight="494.0" prefWidth="909.0" styleClass="tablePane" stylesheets="@style.css">
+         <children>
+            <Pane layoutY="46.0" prefHeight="425.0" prefWidth="806.0">
+               <children>
+                  <ImageView fitHeight="442.0" fitWidth="785.0" layoutX="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/restaurant_layout.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="142.0" layoutY="39.0" text="A01">
+                     <font>
+                        <Font name="Consolas Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="237.0" layoutY="39.0" text="A02">
+                     <font>
+                        <Font name="Consolas Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="108.0" layoutY="139.0" text="A03">
+                     <font>
+                        <Font name="Consolas Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="247.0" layoutY="204.0" text="A04">
+                     <font>
+                        <Font name="Consolas Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="108.0" layoutY="313.0" text="A05">
+                     <font>
+                        <Font name="Consolas Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="273.0" layoutY="336.0" text="A06">
+                     <font>
+                        <Font name="Consolas Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="133.0" layoutY="366.0" text="A07">
+                     <font>
+                        <Font name="Consolas Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="248.0" layoutY="366.0" text="A08">
+                     <font>
+                        <Font name="Consolas Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Circle fx:id="Table_A03" fill="#e1dabf" layoutX="119.0" layoutY="99.0" radius="34.0" stroke="#ffffff00" strokeType="INSIDE" />
+                  <Circle fx:id="Table_A04" fill="#e1dabf" layoutX="256.0" layoutY="167.0" radius="34.0" stroke="#ffffff00" strokeType="INSIDE" />
+                  <Circle fx:id="Table_A05" fill="#e1dabf" layoutX="119.0" layoutY="271.0" radius="34.0" stroke="#ffffff00" strokeType="INSIDE" />
+                  <Circle fx:id="Table_A06" fill="#e1dabf" layoutX="286.0" layoutY="296.0" radius="34.0" stroke="#ffffff00" strokeType="INSIDE" />
+                  <Rectangle fx:id="Table_A01" arcHeight="5.0" arcWidth="5.0" fill="#e1dabf" height="29.0" layoutX="135.0" layoutY="10.0" stroke="#ffffff00" strokeType="INSIDE" width="38.0" />
+                  <Rectangle fx:id="Table_A02" arcHeight="5.0" arcWidth="5.0" fill="#e1dabf" height="29.0" layoutX="227.0" layoutY="10.0" stroke="#ffffff00" strokeType="INSIDE" width="38.0" />
+                  <Rectangle fx:id="Table_A07" arcHeight="5.0" arcWidth="5.0" fill="#e1dabf" height="29.0" layoutX="125.0" layoutY="381.0" stroke="#ffffff00" strokeType="INSIDE" width="38.0" />
+                  <Rectangle fx:id="Table_A08" arcHeight="5.0" arcWidth="5.0" fill="#e1dabf" height="29.0" layoutX="241.0" layoutY="381.0" stroke="#ffffff00" strokeType="INSIDE" width="38.0" />
+                  <VBox fx:id="legendTable" layoutX="654.0" layoutY="10.0" prefHeight="123.0" prefWidth="243.0" styleClass="legendTable" stylesheets="@style.css">
+                     <children>
+                        <HBox prefHeight="39.0" prefWidth="216.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a5db99" height="25.0" stroke="TRANSPARENT" strokeType="INSIDE" width="32.0">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </HBox.margin>
+                              </Rectangle>
+                              <Label prefHeight="25.0" prefWidth="134.0" text="- Available Table">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="29.0" prefWidth="216.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffbebe" height="25.0" stroke="TRANSPARENT" strokeType="INSIDE" width="32.0" />
+                              <Label prefHeight="25.0" prefWidth="177.0" text="- Customer Table In Use">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="33.0" prefWidth="216.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f793" height="25.0" stroke="TRANSPARENT" strokeType="INSIDE" width="32.0" />
+                              <Label prefHeight="25.0" prefWidth="134.0" text="- Selected Table">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </Pane>
+            <Label layoutX="10.0" layoutY="8.0" text="TABLE MANAGEMENT">
+               <font>
+                  <Font name="Bernard MT Condensed" size="28.0" />
+               </font>
+            </Label>
+            <Pane fx:id="mainPane" layoutX="655.0" layoutY="202.0" prefHeight="257.0" prefWidth="220.0">
+               <children>
+                  <GridPane prefHeight="212.0" prefWidth="243.0" styleClass="legendTable">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="117.33331298828125" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="121.66668701171875" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="81.33331298828125" minHeight="0.0" prefHeight="35.333343505859375" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="172.0" minHeight="0.0" prefHeight="36.666656494140625" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="41.66668701171875" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="120.33331298828125" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Table No">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Table Pax" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="tableNoLabel" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="tablePaxLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Availability" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Details" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="tableAvailabilityLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="tableDetailsLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </GridPane>
+                  <Button fx:id="modifyButton" layoutX="55.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleModify" prefHeight="29.0" prefWidth="134.0" text="Modify Table" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

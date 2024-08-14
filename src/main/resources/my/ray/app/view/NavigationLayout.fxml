@@ -67,6 +67,27 @@
                         </ButtonBar>
                      </children>
                   </HBox>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="181.0">
+                     <children>
+                        <ButtonBar fx:id="nav_report1" onMouseClicked="#getTableManagement" prefHeight="58.0" prefWidth="179.0" styleClass="navBar" stylesheets="@style.css">
+                           <buttons>
+                              <ImageView fitHeight="75.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/table_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="46.0" prefWidth="112.0" text="Table Management " wrapText="true">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </buttons>
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </ButtonBar>
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER" prefHeight="78.0" prefWidth="133.0">
                      <children>
                         <ButtonBar fx:id="nav_report" styleClass="navBar" stylesheets="@style.css">
@@ -88,7 +109,7 @@
                         </ButtonBar>
                      </children>
                   </HBox>
-                  <Label prefHeight="78.0" prefWidth="354.0" />
+                  <Label prefHeight="78.0" prefWidth="196.0" />
                   <HBox fx:id="logout_nav" alignment="CENTER_RIGHT" onMouseClicked="#logout" prefHeight="78.0" prefWidth="118.0" styleClass="logout_nav" stylesheets="@style.css">
                      <children>
                         <ImageView fitHeight="31.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">

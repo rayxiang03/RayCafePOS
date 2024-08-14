@@ -20,6 +20,10 @@ class NavigationController {
     MainApp.showOrderPage()
   }
 
+  def getTableManagement() = {
+    MainApp.showTablePage()
+  }
+
   def logout(): Unit = {
     SessionManager.endSession()
     Platform.runLater(() => {

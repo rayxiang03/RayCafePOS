@@ -8,7 +8,7 @@ import scalafx.scene.image.Image
 import scalafx.Includes._
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 import javafx.{scene => jfxs}
-import my.ray.app.model.{Beverage, Dessert, MainCourse, Merchandise, Product, Salad}
+import my.ray.app.model.{Beverage, Dessert, MainCourse, Merchandise, Product, Salad, Table}
 import my.ray.app.view.{LoginController, ProductCardController, ProductController}
 import scalafx.animation.{PauseTransition, ScaleTransition}
 import scalafx.collections.ObservableBuffer
@@ -20,11 +20,17 @@ object MainApp extends JFXApp {
 
   Database.setupDB()
 
-  // Observable buffer for products
+  // Observable buffer
   val productData = new ObservableBuffer[Product]()
   val currentOrderItems = new ObservableBuffer[(Product, Int)]()
-  var isTakeAwayChecked: Boolean = false
+  val tableDetails = new ObservableBuffer[Table]()
+      tableDetails ++= Table.getAllTables
+  val availableTable = new ObservableBuffer[Table]()
+      availableTable ++= Table.getAvailableTables
 
+  // Preferences & Behaviors tracking
+  var isTakeAwayChecked: Boolean = false
+  var productCardMode: String = _
 
   //Load RootLayout.fxml
   val rootResource = getClass.getResource("view/RootLayout.fxml")
@@ -73,21 +79,11 @@ object MainApp extends JFXApp {
     productData.clear() //avoid duplicate looping data
 
     category match {
-      case "Beverages" =>
-        productData ++= Beverage.getAllBeverages
-
-      case "Desserts" =>
-        productData ++= Dessert.getAllDesserts
-
-      case "Main Courses" =>
-        productData ++= MainCourse.getAllMainCourses
-
-      case "Salads" =>
-        productData ++= Salad.getAllSalads
-
-      case "Merchandises" =>
-        productData ++= Merchandise.getMerchandiseData
-
+      case "Beverages" => productData ++= Beverage.getAllBeverages
+      case "Desserts" => productData ++= Dessert.getAllDesserts
+      case "Main Courses" => productData ++= MainCourse.getAllMainCourses
+      case "Salads" => productData ++= Salad.getAllSalads
+      case "Merchandises" => productData ++= Merchandise.getMerchandiseData
       case _ =>
     }
 
@@ -102,7 +98,8 @@ object MainApp extends JFXApp {
   }
 
 
-  def showProductCard(product: Product): Unit = {
+  def showProductCard(product: Product, mode: String, quantity: Int = 1): Unit = {
+    productCardMode = mode
     val resource = getClass.getResource("view/ProductCard.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load()
@@ -135,6 +132,11 @@ object MainApp extends JFXApp {
       toY = 1
     }
 
+    // Set the initial value of the spinner if in update mode
+    if (mode == "update") {
+      productCardController.tempQty = quantity
+    }
+
     productCardController.dialogStage = dialog
     productCardController.product = product
 
@@ -157,7 +159,7 @@ object MainApp extends JFXApp {
     val controller = loader.getController[LoginController#Controller]
     if (logoutSuccessful) {
       controller.displayLogoutMessage()
-
+      currentOrderItems.clear()
       val pause = new PauseTransition(Duration(3000))
       pause.setOnFinished(_ => controller.clearLogoutMessage())
       pause.play()
@@ -165,6 +167,14 @@ object MainApp extends JFXApp {
     } else {
       controller.clearLogoutMessage()
     }
+  }
+
+  def showTablePage(): Unit = {
+    val resource = getClass.getResource("view/TableSelection.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load();
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+    this.roots.setCenter(roots)
   }
 
   //First Page

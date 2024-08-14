@@ -14,11 +14,6 @@ class Beverage(
                 _status: String
               ) extends Product(_id, _name, _price, _description, _stock, _imagePath, _status) with Consumable {
 
-//    var productName = new StringProperty(_name)
-//    var productPrice = new StringProperty(_price.toString)
-//    var productImage: ObjectProperty[Image] = ObjectProperty(_imagePath)
-//    var productDescription = new StringProperty(_description)
-
 }
 
 // Companion object for Beverage

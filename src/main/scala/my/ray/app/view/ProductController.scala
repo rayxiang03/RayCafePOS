@@ -54,15 +54,15 @@ class ProductController(
   }
 
 
-  private def showProductCard(product: Product): Unit = {
-    MainApp.showProductCard(product) // Call the showProductCard method of MainApp
+  private def showProductCard(product: Product, mode: String): Unit = {
+    MainApp.showProductCard(product, mode) // Call the showProductCard method of MainApp
   }
 
   // Add mouse click event handler to detect row clicks
   orderTable.onMouseClicked = _ => {
     val selectedProduct = orderTable.selectionModel().selectedItem.value
     if (selectedProduct != null) {
-      showProductCard(selectedProduct)
+      showProductCard(selectedProduct, "add")
     }
   }
 
