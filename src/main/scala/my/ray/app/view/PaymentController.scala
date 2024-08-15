@@ -1,0 +1,91 @@
+package my.ray.app.view
+
+import scalafx.scene.control.{Label, RadioButton, TableColumn, TableView, TextField, ToggleGroup}
+import scalafx.stage.Stage
+import my.ray.app.model.Product
+import scalafx.animation.PauseTransition
+import scalafx.beans.property.{ObjectProperty, StringProperty}
+import scalafx.util.Duration
+import scalafxml.core.macros.sfxml
+
+import scala.util.Try
+
+@sfxml
+class PaymentController(
+                         private val checkOrderTable: TableView[(Product, Int)],
+                         private val numberColumn: TableColumn[(Product, Int), Int],
+                         private val idColumn: TableColumn[(Product, Int), String],
+                         private val productColumn: TableColumn[(Product, Int), String],
+                         private val quantityColumn: TableColumn[(Product, Int), Int],
+                         private val priceColumn: TableColumn[(Product, Int), String],
+                         private val subTotal: Label,
+                         private val serviceCharge: Label,
+                         private val sstCharge: Label,
+                         private val total: Label,
+                         private val paymentAmountField: TextField,
+                         private val paymentMethod: ToggleGroup,
+                         private val changeAmountField: TextField
+                       ) {
+
+  var paymentStage: Stage = _
+
+  // Set up table columns
+  numberColumn.cellValueFactory = cellData => ObjectProperty(checkOrderTable.getItems.indexOf(cellData.value) + 1)
+  idColumn.cellValueFactory = cellData => StringProperty(cellData.value._1.id)
+  productColumn.cellValueFactory = cellData => StringProperty(cellData.value._1.name)
+  quantityColumn.cellValueFactory = cellData => ObjectProperty(cellData.value._2)
+  priceColumn.cellValueFactory = { cellData =>
+    val totalPrice = cellData.value._1.price * cellData.value._2
+    StringProperty(f"$totalPrice%.2f")
+  }
+
+  paymentMethod.selectedToggle.onChange { (_, _, newToggle) =>
+    Option(newToggle).collect {
+      case rb: javafx.scene.control.RadioButton => rb.getId
+    } match {
+      case Some("eWalletRadioButton") =>
+        paymentAmountField.disable = true
+        paymentAmountField.text = total.text.value
+      case Some("cashRadioButton") =>
+        paymentAmountField.disable = false
+        paymentAmountField.text = "" // Clear payment amount
+      case _ =>
+        println("No matching toggle found")
+    }
+  }
+
+  paymentAmountField.text.onChange { (_, _, newValue) =>
+      val payableAmount = Try(total.text.value.toDouble).getOrElse(0.0)
+      val paymentAmount = Try(newValue.toDouble).getOrElse(0.0)
+
+      if (paymentAmount >= payableAmount) {
+        val changeAmount = paymentAmount - payableAmount
+        changeAmountField.text = f"$changeAmount%.2f"
+      } else {
+        changeAmountField.text = "0.00"
+      }
+    }
+
+
+  def setOrderItems(orderItems: List[(Product, Int)]): Unit = {
+    checkOrderTable.getItems.setAll(orderItems: _*)
+  }
+
+  def setAmounts(subTotalValue: Double, serviceChargeValue: Double, sstValue: Double, totalValue: Double): Unit = {
+    subTotal.setText(f"$subTotalValue%.2f")
+    serviceCharge.setText(f"$serviceChargeValue%.2f")
+    sstCharge.setText(f"$sstValue%.2f")
+    total.setText(f"$totalValue%.2f")
+  }
+
+  def handleReturnBack(): Unit = {
+    paymentStage.close()
+  }
+
+  def handleConfirmPayment(): Unit = {
+    //    MainApp.processPayment()
+    paymentStage.close()
+  }
+
+
+}

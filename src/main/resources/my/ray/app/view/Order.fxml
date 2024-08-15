@@ -82,7 +82,7 @@
                      </font></Label>
                   <Text fx:id="total" layoutX="227.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="RIGHT" wrappingWidth="55.798828125" />
                   <CheckBox fx:id="isTakeAway" layoutX="33.0" layoutY="454.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="81.0" text="Take Away" />
-                  <Button layoutX="138.0" layoutY="447.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="151.0" text="Proceed to Payment" />
+                  <Button layoutX="138.0" layoutY="447.0" mnemonicParsing="false" onAction="#proceedPayment" prefHeight="37.0" prefWidth="151.0" text="Proceed to Payment" />
                   <Line endX="95.0" layoutX="199.0" layoutY="378.0" startX="-133.0" />
                   <Pane fx:id="tableSelectionPane" layoutX="36.0" layoutY="411.0" prefHeight="25.0" prefWidth="165.0">
                      <children>

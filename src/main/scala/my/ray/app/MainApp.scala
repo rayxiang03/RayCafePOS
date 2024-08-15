@@ -9,7 +9,7 @@ import scalafx.Includes._
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 import javafx.{scene => jfxs}
 import my.ray.app.model.{Beverage, Dessert, MainCourse, Merchandise, Product, Salad, Table}
-import my.ray.app.view.{LoginController, ProductCardController, ProductController, TableSelectionController}
+import my.ray.app.view.{LoginController, PaymentController, ProductCardController, ProductController, TableSelectionController}
 import scalafx.animation.{PauseTransition, ScaleTransition}
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.{BorderPane, StackPane}
@@ -212,7 +212,27 @@ object MainApp extends JFXApp {
   }
 
 
-  def showPaymentPage(): Unit = {
+  def showPaymentPage(currentOrderItems: List[(Product, Int)], subTotal: Double, serviceCharge: Double, sst: Double, total: Double): Unit = {
+    val resource = getClass.getResource("view/Payment.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val paymentPane = loader.getRoot[jfxs.layout.AnchorPane]
+
+    val paymentStage = new Stage() {
+      initModality(Modality.ApplicationModal)
+      initOwner(stage)
+      initStyle(StageStyle.TRANSPARENT)
+      scene = new Scene(paymentPane) {
+        fill = null
+      }
+    }
+
+    val controller = loader.getController[PaymentController#Controller]
+    controller.setOrderItems(currentOrderItems)
+    controller.setAmounts(subTotal, serviceCharge, sst, total)
+    controller.paymentStage = paymentStage
+
+    paymentStage.showAndWait()
 
   }
   //First Page

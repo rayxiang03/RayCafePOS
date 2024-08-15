@@ -5,7 +5,7 @@ import my.ray.app.MainApp
 import my.ray.app.model.{Product, Table}
 import scalafx.beans.property.ObjectProperty
 import scalafxml.core.macros.sfxml
-import scalafx.scene.control.{CheckBox, MenuItem, SplitMenuButton, TableColumn, TableView}
+import scalafx.scene.control.{Alert, CheckBox, MenuItem, SplitMenuButton, TableColumn, TableView}
 import scalafx.scene.text.Text
 import javafx.{scene => jfxs}
 import scalafx.scene.layout.Pane
@@ -138,6 +138,26 @@ class OrderController(
 
   def handleTableSelection(): Unit = {
     MainApp.showTablePage("from_Order", table => chooseTableNo.text = table.tableId.value)
+  }
+
+  def proceedPayment(): Unit = {
+    if (currentOrderTable.getItems.isEmpty) {
+      val alert = new Alert(Alert.AlertType.Warning) {
+        initOwner(MainApp.stage)
+        title = "Empty Order"
+        headerText = "No products in the order"
+        contentText = "Please add products to the order before proceeding to payment."
+      }
+      alert.showAndWait()
+      return
+    }
+    val subtotalValue = subTotal.text.value.toDouble
+    val serviceChargeValue = serviceCharge.text.value.toDouble
+    val sstValue = sstCharge.text.value.toDouble
+    val totalValue = total.text.value.toDouble
+    val currentOrderItemsList = currentOrderItems.toList
+
+    MainApp.showPaymentPage(currentOrderItemsList, subtotalValue, serviceChargeValue, sstValue, totalValue)
   }
 
   updateTotals()

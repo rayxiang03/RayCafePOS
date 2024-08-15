@@ -114,4 +114,60 @@
     -fx-background-position: center;
 }
 
+.paymentPane {
+    -fx-background-color: transparent;
+    -fx-background-image: url("/images/Background_Paper.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
 
+.posTableView {
+    -fx-background-color: transparent;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.posTableView .column-header-background {
+    -fx-background-color: #9e9a9a;
+}
+
+.posTableView .column-header {
+    -fx-background-color: #b5afaf;
+    -fx-text-fill: white;
+    -fx-font-size: 10px; /* Increased font size */
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+.posTableView .table-row-cell {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.posTableView .table-row-cell:odd {
+    -fx-background-color: rgba(245, 245, 245, 0.9);
+}
+
+.posTableView .table-cell {
+    -fx-padding: 2px;
+    -fx-font-size: 10px;
+    -fx-text-fill: #333333;
+    -fx-alignment: center-left;
+}
+
+.posTableView .table-cell:filled {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.posTableView .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+}
+
+.changeTextField{
+    -fx-background-color: #b7cae4;
+}
