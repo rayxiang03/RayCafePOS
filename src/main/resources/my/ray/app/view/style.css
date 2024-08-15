@@ -26,7 +26,7 @@
 }
 
 .orderNav{
-    -fx-background-color: #e4ddd6;
+    -fx-background-color: rgba(228, 221, 214, 0.9);
     -fx-text-fill: white;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
@@ -47,6 +47,22 @@
     -fx-text-fill: #8e7d64;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
+}
+
+.categoryButton {
+    -fx-background-image: url("/images/wooden_button.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 90% 110%;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.categoryButton:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgb(232, 219, 192), 10, 0.5, 0, 0);
 }
 
 
@@ -82,14 +98,20 @@
 }
 
 .tablePane {
-    -fx-background-color: #e4ddd6;
+    -fx-background-color: rgba(228, 221, 214, 0.9);
     -fx-background-radius: 20;
     -fx-border-radius: 20;
     -fx-padding: 10;
 }
 
 .currentOrderPane{
-    -fx-background-color: #e4ddd6;
+    -fx-background-color: rgba(228, 221, 214, 0.9);
+}
+
+.backgroundImage {
+    -fx-background-image: url("/images/background.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
 }
 
 

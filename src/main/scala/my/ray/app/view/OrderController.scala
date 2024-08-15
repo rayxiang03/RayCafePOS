@@ -2,7 +2,7 @@ package my.ray.app.view
 
 import javafx.event.ActionEvent
 import my.ray.app.MainApp
-import my.ray.app.model.Product
+import my.ray.app.model.{Product, Table}
 import scalafx.beans.property.ObjectProperty
 import scalafxml.core.macros.sfxml
 import scalafx.scene.control.{CheckBox, MenuItem, SplitMenuButton, TableColumn, TableView}
@@ -137,7 +137,7 @@ class OrderController(
   }
 
   def handleTableSelection(): Unit = {
-
+    MainApp.showTablePage("from_Order", table => chooseTableNo.text = table.tableId.value)
   }
 
   updateTotals()

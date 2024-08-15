@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.NavigationController">
+<AnchorPane minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.NavigationController" fx:id = "navigationLayout">
    <children>
       <BorderPane prefHeight="650.0" prefWidth="1015.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -69,7 +69,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="78.0" prefWidth="181.0">
                      <children>
-                        <ButtonBar fx:id="nav_report1" onMouseClicked="#getTableManagement" prefHeight="58.0" prefWidth="179.0" styleClass="navBar" stylesheets="@style.css">
+                        <ButtonBar fx:id="nav_table" onMouseClicked="#getTableManagement" prefHeight="58.0" prefWidth="179.0" styleClass="navBar" stylesheets="@style.css">
                            <buttons>
                               <ImageView fitHeight="75.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

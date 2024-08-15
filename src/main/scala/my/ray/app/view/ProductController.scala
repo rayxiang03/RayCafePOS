@@ -16,9 +16,6 @@ class ProductController(
                           private val orderTable: TableView[Product],
                           private val prodPicture: TableColumn[Product, Image],
                           private val prodName: TableColumn[Product, String],
-                          private val prodPrice: TableColumn[Product, String],
-                          private val prodCategory: TableColumn[Product, String],
-                          private val banner: HBox,
                           private val bannerImage1: ImageView,
                         ) {
 
@@ -32,7 +29,6 @@ class ProductController(
   // Set cell value factories
   prodName.cellValueFactory = _.value.nameProperty
   prodPicture.cellValueFactory = _.value.imageProperty
-  //  prodPrice.cellValueFactory = _.value.priceProperty
 
   // Set cell factory for the image column
   prodPicture.cellFactory = { _ =>
@@ -87,7 +83,7 @@ class ProductController(
     }
 
     val pane = new StackPane() {
-      children = enlargedImageView // Wrap ImageView in ScalaFX StackPane
+      children = enlargedImageView
     }
 
     val popupStage = new Stage() {

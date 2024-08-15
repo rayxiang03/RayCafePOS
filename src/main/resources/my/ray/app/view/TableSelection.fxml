@@ -16,10 +16,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.TableSelectionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" styleClass="backgroundImage" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.TableSelectionController">
    <children>
       <fx:include source="NavigationLayout.fxml" />
-      <Pane layoutX="118.0" layoutY="88.0" prefHeight="494.0" prefWidth="909.0" styleClass="tablePane" stylesheets="@style.css">
+      <Pane fx:id="fullTablePane" layoutX="118.0" layoutY="88.0" prefHeight="494.0" prefWidth="909.0" styleClass="tablePane" stylesheets="@style.css">
          <children>
             <Pane layoutY="46.0" prefHeight="425.0" prefWidth="806.0">
                <children>
@@ -170,7 +170,7 @@
                         <Insets top="10.0" />
                      </padding>
                   </GridPane>
-                  <Button fx:id="modifyButton" layoutX="55.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleModify" prefHeight="29.0" prefWidth="134.0" text="Modify Table" />
+                  <Button fx:id="modifyButton" layoutX="55.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleModifyAdd" prefHeight="29.0" prefWidth="134.0" text="MULTI" />
                </children>
             </Pane>
          </children>

@@ -2,11 +2,13 @@ package my.ray.app.view
 
 import my.ray.app.MainApp
 import my.ray.app.model.Table
-import scalafx.scene.control.{Button, Label}
+import scalafx.scene.control.Alert.AlertType
+import scalafx.scene.control.{Alert, Button, Label}
 import scalafx.scene.layout.Pane
 import scalafx.scene.shape.{Circle, Rectangle, Shape}
 import scalafx.scene.paint.Color
 import scalafxml.core.macros.sfxml
+
 import scala.collection.convert.ImplicitConversions.`collection AsScalaIterable`
 
 @sfxml
@@ -24,7 +26,8 @@ class TableSelectionController(
                                 private val tableAvailabilityLabel: Label,
                                 private val tableDetailsLabel: Label,
                                 private val modifyButton: Button,
-                                private val mainPane: Pane
+                                private val mainPane: Pane,
+                                var onTableSelected: Table => Unit //Callback function
                               ) {
 
   // ObservableBuffer for all tables
@@ -37,9 +40,11 @@ class TableSelectionController(
 
   // Variable to keep track of the currently selected table
   private var selectedTable: Option[Table] = None
+  var pageSource: String = _
 
   // Store the original content of mainPane
   private val originalContent = mainPane.children.toList
+
 
   // Hide the modify button initially
   modifyButton.visible = false
@@ -75,7 +80,7 @@ class TableSelectionController(
   }
 
   private def handleTableClick(shape: Shape, table: Table): Unit = {
-      resetTableColors()
+    resetTableColors()
 
     if (selectedTable.contains(table)) {
       // Deselect the table
@@ -110,10 +115,29 @@ class TableSelectionController(
     }
   }
 
-  def handleModify(): Unit = {
+  def handleModifyAdd(): Unit = {
+
+    pageSource match {
+      case "from_Navigation" =>
+        modifyButton.text = "MODIFY TABLE"
+      case "from_Order" =>
+        modifyButton.text = "SELECT TABLE"
+    }
+
     selectedTable.foreach { table =>
-      println(s"Modify table: ${table.tableId.value}")
+      if (table.availability.value && pageSource == "from_Order") {
+        onTableSelected(table) // Call the callback function
+        MainApp.popupStage.close()
+      } else if (pageSource == "from_Order") {
+        new Alert(AlertType.Warning) {
+          initOwner(MainApp.stage)
+          title = "Table Unavailable"
+          headerText = "Selected Table is Unavailable"
+          contentText = s"Table ${table.tableId.value} is currently in use."
+        }.showAndWait()
+      }
     }
   }
+
   clearLabels()
 }
