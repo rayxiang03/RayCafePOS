@@ -1,7 +1,7 @@
 package my.ray.app.util
 
 import scalikejdbc._
-import my.ray.app.model.{Role, Table, User}
+import my.ray.app.model.{OrderTransaction, Role, Table, User}
 
 trait Database {
   val derbyDriverClassname = "org.apache.derby.jdbc.EmbeddedDriver"
@@ -21,21 +21,21 @@ object Database extends Database {
   def setupDB(): Unit = {
     if (!hasDBInitialize) {
       // Only initialize if at least one table is missing
-      if (!tableExists("Role")) {
-        Role.initializeTable()
-      }
       if (!tableExists("User")) {
         User.initializeTable()
       }
       if (!tableExists("Table")) {
         Table.initializeTable()
       }
+      if (!tableExists("Txn_order_header") || !tableExists("Txn_order_detail")) {
+        OrderTransaction.initializeTable()
+      }
     }
   }
 
   // Checks if the database is initialized by confirming the presence of all tables
   def hasDBInitialize: Boolean = {
-    tableExists("Role") && tableExists("User") && tableExists("Table")
+    tableExists("User") && tableExists("Table") && tableExists("Txn_order_header") && tableExists("Txn_order_detail")
   }
 
   // Utility function to check if a specific table exists

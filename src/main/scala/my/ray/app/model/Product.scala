@@ -14,10 +14,10 @@ abstract class Product(
                       ) {
 
   // Define properties for binding
-  def idProperty: StringProperty = new StringProperty(this, "id", id)
-  def nameProperty: StringProperty = new StringProperty(this, "name", name)
+  def idProperty: StringProperty = new StringProperty(id)
+  def nameProperty: StringProperty = new StringProperty(name)
   def priceProperty: DoubleProperty = new DoubleProperty(this, "price", price)
-  def descriptionProperty: StringProperty = new StringProperty(this, "description", description)
+  def descriptionProperty: StringProperty = new StringProperty(description)
   def stockProperty: IntegerProperty = new IntegerProperty(this, "stock", stock)
   def imageProperty: ObjectProperty[Image] = new ObjectProperty(this, "imagePath", imagePath)
 }

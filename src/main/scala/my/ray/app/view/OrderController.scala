@@ -157,7 +157,6 @@ class OrderController(
     val sstValue = sstCharge.text.value.toDouble
     val totalValue = total.text.value.toDouble
     val currentOrderItemsList = currentOrderItems.toList
-    val takeAwayValue = takeAwayStatus.toString
 
     MainApp.showPaymentPage(currentOrderItemsList, subtotalValue, serviceChargeValue, sstValue, totalValue)
   }

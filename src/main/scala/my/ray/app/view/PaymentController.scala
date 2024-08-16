@@ -1,13 +1,15 @@
 package my.ray.app.view
 
-import scalafx.scene.control.{Label, RadioButton, TableColumn, TableView, TextField, ToggleGroup}
+import my.ray.app.MainApp
+import scalafx.scene.control.{Alert, Label, RadioButton, TableColumn, TableView, TextField, ToggleGroup}
 import scalafx.stage.Stage
-import my.ray.app.model.Product
+import my.ray.app.model.{OrderTransaction, Product}
 import scalafx.animation.PauseTransition
 import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalafx.util.Duration
 import scalafxml.core.macros.sfxml
 
+import scala.collection.convert.ImplicitConversions.`collection AsScalaIterable`
 import scala.util.Try
 
 @sfxml
@@ -55,16 +57,16 @@ class PaymentController(
   }
 
   paymentAmountField.text.onChange { (_, _, newValue) =>
-      val payableAmount = Try(total.text.value.toDouble).getOrElse(0.0)
-      val paymentAmount = Try(newValue.toDouble).getOrElse(0.0)
+    val payableAmount = Try(total.text.value.toDouble).getOrElse(0.0)
+    val paymentAmount = Try(newValue.toDouble).getOrElse(0.0)
 
-      if (paymentAmount >= payableAmount) {
-        val changeAmount = paymentAmount - payableAmount
-        changeAmountField.text = f"$changeAmount%.2f"
-      } else {
-        changeAmountField.text = "0.00"
-      }
+    if (paymentAmount >= payableAmount) {
+      val changeAmount = paymentAmount - payableAmount
+      changeAmountField.text = f"$changeAmount%.2f"
+    } else {
+      changeAmountField.text = "0.00"
     }
+  }
 
 
   def setOrderItems(orderItems: List[(Product, Int)]): Unit = {
@@ -83,9 +85,40 @@ class PaymentController(
   }
 
   def handleConfirmPayment(): Unit = {
-    //    MainApp.processPayment()
+    val payableAmount = total.text.value.toDouble
+    val paymentAmount =  Try(paymentAmountField.text.value.toDouble).getOrElse(0.0)
+
+    if (paymentAmount < payableAmount) {
+      val alert = new Alert(Alert.AlertType.Warning) {
+        initOwner(MainApp.stage)
+        title = "Insufficient Payment"
+        headerText = "Payment amount is less than the total amount"
+        contentText = "Please enter a valid payment amount."
+      }
+      alert.showAndWait()
+      return
+    }
+
+    val orderItems = checkOrderTable.getItems.map { case (product, quantity) =>
+      (product, quantity, product.price * quantity)
+    }.toList
+
+
+    val order = new OrderTransaction(
+      orderItems,
+      subTotal.text.value.toDouble,
+      serviceCharge.text.value.toDouble,
+      sstCharge.text.value.toDouble,
+      total.text.value.toDouble,
+      paymentMethod.selectedToggle.value.asInstanceOf[javafx.scene.control.RadioButton].getText,
+      paymentAmountField.text.value.toDouble,
+      changeAmountField.text.value.toDouble,
+      MainApp.isTakeAwayChecked.toString.toBoolean
+    )
+
+    // Save the order
+    order.save()
+    MainApp.currentOrderItems.clear()
     paymentStage.close()
   }
-
-
 }
