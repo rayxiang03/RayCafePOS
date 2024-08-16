@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -14,119 +16,224 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.ReceiptController">
+<AnchorPane maxHeight="600.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="351.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.ray.app.view.ReceiptController">
    <children>
-      <Pane layoutX="16.0" layoutY="-8.0" prefHeight="270.0" prefWidth="281.0">
-         <children>
-            <ImageView fitHeight="111.0" fitWidth="116.0" layoutX="79.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../images/receipt_logo.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="27.0" layoutY="115.0" text="RAY' CAFE MALAYSIA SDN. BHD.">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="79.0" layoutY="130.0" text="\@ Bandar Sunway" textAlignment="CENTER">
-               <font>
-                  <Font name="Bodoni MT" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="1.0" layoutY="150.0" prefHeight="34.0" prefWidth="270.0" text="Lot 10, Jalan PJS 1/1 , Bandar Sunway, 47500 Subang Jaya, Selangor" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font name="Bodoni MT" size="13.0" />
-               </font>
-            </Label>
-            <Label layoutX="56.0" layoutY="187.0" prefHeight="17.0" prefWidth="163.0" text="SST NO: B10-0866-32000011">
-               <font>
-                  <Font name="Baskerville Old Face" size="13.0" />
-               </font>
-            </Label>
-            <Label layoutY="200.0" text="---------------------------------------------------------" />
-            <Label layoutX="1.0" layoutY="248.0" text="---------------------------------------------------------" />
-            <Label layoutX="1.0" layoutY="212.0" text="Receipt No">
-               <font>
-                  <Font name="SansSerif Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label fx:id="orderNo" layoutX="2.0" layoutY="222.0" prefHeight="34.0" prefWidth="155.0" text="-" wrapText="true">
-               <font>
-                  <Font name="SansSerif Regular" size="11.0" />
-               </font>
-            </Label>
-            <Label fx:id="salesDate" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="198.0" layoutY="221.0" prefHeight="34.0" prefWidth="75.0" text="DateTime" wrapText="true">
-               <font>
-                  <Font name="SansSerif Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="232.0" layoutY="12.0" text="Print (1/1)">
-               <font>
-                  <Font name="Consolas" size="8.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <VBox layoutX="17.0" layoutY="256.0" prefHeight="342.0" prefWidth="274.0">
-         <children>
-            <TableView fx:id="productTable" fixedCellSize="0.0" focusTraversable="false" mouseTransparent="true" prefHeight="149.0" prefWidth="274.0" styleClass="receiptTable" stylesheets="@style.css" VBox.vgrow="ALWAYS">
-              <columns>
-                <TableColumn fx:id="itemColumn" editable="false" prefWidth="195.0" sortable="false" text="Item" />
-                <TableColumn fx:id="qtyColumn" editable="false" prefWidth="34.0" sortable="false" text="Qty" />
-                  <TableColumn fx:id="totalColumn" editable="false" prefWidth="45.0" sortable="false" text="Total" />
-              </columns>
-            </TableView>
-            <Label prefHeight="6.0" prefWidth="274.0" text="---------------------------------------------------------" VBox.vgrow="NEVER" />
-            <GridPane prefHeight="88.0" prefWidth="164.0" VBox.vgrow="NEVER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0" minWidth="10.0" prefWidth="116.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="48.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <VBox.margin>
-                  <Insets left="110.0" />
-               </VBox.margin>
+      <ScrollPane fitToHeight="true" focusTraversable="false" hbarPolicy="NEVER" layoutX="12.0" layoutY="-8.0" maxHeight="300.0" prefHeight="600.0" prefWidth="351.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <Group>
                <children>
-                  <Label text="Subtotal" />
-                  <Label text="Svr Chg (10%)" GridPane.rowIndex="1" />
-                  <Label text="SST (6%)" GridPane.rowIndex="2" />
-                  <Label text="Total" GridPane.rowIndex="3">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font></Label>
-                  <Label fx:id="subTotal" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="48.0" text="Label" GridPane.columnIndex="1" />
-                  <Label fx:id="serviceCharge" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="52.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="sstCharge" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="75.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="total" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="68.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <Label text="Payment " GridPane.rowIndex="4" />
-                  <Label text="Change" GridPane.rowIndex="5" />
-                  <Label fx:id="payment" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="79.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label fx:id="change" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="75.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Pane prefHeight="270.0" prefWidth="281.0">
+                     <children>
+                        <ImageView fitHeight="111.0" fitWidth="116.0" layoutX="79.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/receipt_logo.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="27.0" layoutY="115.0" text="RAY' CAFE MALAYSIA SDN. BHD.">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="79.0" layoutY="130.0" text="\@ Bandar Sunway" textAlignment="CENTER">
+                           <font>
+                              <Font name="Bodoni MT" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="1.0" layoutY="150.0" prefHeight="34.0" prefWidth="270.0" text="Lot 10, Jalan PJS 1/1 , Bandar Sunway, 47500 Subang Jaya, Selangor" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="Bodoni MT" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="56.0" layoutY="187.0" prefHeight="17.0" prefWidth="163.0" text="SST NO: B10-0866-32000011">
+                           <font>
+                              <Font name="Baskerville Old Face" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutY="200.0" text="---------------------------------------------------------" />
+                        <Label layoutX="1.0" layoutY="248.0" text="---------------------------------------------------------" />
+                        <Label layoutX="1.0" layoutY="212.0" text="Receipt No">
+                           <font>
+                              <Font name="SansSerif Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="orderNo" layoutX="2.0" layoutY="222.0" prefHeight="34.0" prefWidth="155.0" text="-" wrapText="true">
+                           <font>
+                              <Font name="SansSerif Regular" size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="salesDate" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="198.0" layoutY="218.0" prefHeight="34.0" prefWidth="75.0" text="DateTime" wrapText="true">
+                           <font>
+                              <Font name="SansSerif Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="232.0" layoutY="12.0" text="Print (1/1)">
+                           <font>
+                              <Font name="Consolas" size="8.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <VBox layoutX="1.0" layoutY="264.0" prefHeight="369.0" prefWidth="274.0">
+                     <children>
+                        <TableView fx:id="productTable" fixedCellSize="0.0" focusTraversable="false" mouseTransparent="true" prefHeight="10.0" prefWidth="274.0" styleClass="receiptTable" stylesheets="@style.css" VBox.vgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="itemColumn" editable="false" prefWidth="195.0" sortable="false" text="Item" />
+                            <TableColumn fx:id="qtyColumn" editable="false" prefWidth="34.0" sortable="false" text="Qty" />
+                              <TableColumn fx:id="totalColumn" editable="false" prefWidth="45.0" sortable="false" text="Total" />
+                          </columns>
+                        </TableView>
+                        <Label prefHeight="10.0" prefWidth="274.0" text="---------------------------------------------------------" VBox.vgrow="NEVER" />
+                        <GridPane minHeight="90.0" prefHeight="100.0" prefWidth="164.0" VBox.vgrow="NEVER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0" minWidth="10.0" prefWidth="107.33331298828125" />
+                            <ColumnConstraints maxWidth="130.0" minWidth="10.0" prefWidth="56.66668701171875" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <VBox.margin>
+                              <Insets left="110.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label text="Subtotal" GridPane.vgrow="SOMETIMES">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Svr Chg (10%)" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="SST (6%)" GridPane.rowIndex="2" GridPane.vgrow="SOMETIMES">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Total" GridPane.rowIndex="3" GridPane.vgrow="SOMETIMES">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="subTotal" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="69.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.vgrow="SOMETIMES">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="serviceCharge" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="96.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="sstCharge" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="75.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="SOMETIMES">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="total" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="95.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.vgrow="SOMETIMES">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Payment " GridPane.rowIndex="4" GridPane.vgrow="SOMETIMES">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Change" GridPane.rowIndex="5" GridPane.vgrow="SOMETIMES">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="payment" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="79.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="SOMETIMES">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="change" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="75.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.vgrow="SOMETIMES">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </GridPane.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="paymentMethod" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="78.0" text="Label" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Italic" size="11.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="50.0" />
+                                 </GridPane.margin>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <Label prefHeight="11.0" prefWidth="274.0" text="---------------------------------------------------------" VBox.vgrow="NEVER" />
+                        <Label prefHeight="14.0" prefWidth="135.0" text="Contact Us: 03-1100 8866" VBox.vgrow="NEVER">
+                           <font>
+                              <Font name="SansSerif Regular" size="11.0" />
+                           </font>
+                        </Label>
+                        <Label text="Powered By： Ray Technology Co., Ltd." VBox.vgrow="NEVER">
+                           <font>
+                              <Font name="SansSerif Regular" size="11.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="20.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
-            </GridPane>
-            <Label prefHeight="11.0" prefWidth="274.0" text="---------------------------------------------------------" VBox.vgrow="NEVER" />
-            <Label prefHeight="14.0" prefWidth="135.0" text="Contact Us: 03-1100 8866" VBox.vgrow="NEVER">
-               <font>
-                  <Font name="SansSerif Regular" size="11.0" />
-               </font>
-            </Label>
-            <Label text="Powered By： Ray Technology Co., Ltd." VBox.vgrow="NEVER">
-               <font>
-                  <Font name="SansSerif Regular" size="11.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
+            </Group>
+         </content>
+         <padding>
+            <Insets left="35.0" />
+         </padding>
+      </ScrollPane>
    </children>
 </AnchorPane>

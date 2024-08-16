@@ -1,12 +1,11 @@
 package my.ray.app.view
 
 import my.ray.app.MainApp
-import scalafx.scene.control.{Alert, Label, RadioButton, TableColumn, TableView, TextField, ToggleGroup}
+import scalafx.scene.control.{Alert, ButtonType, Label, TableColumn, TableView, TextField, ToggleGroup}
 import scalafx.stage.Stage
 import my.ray.app.model.{OrderTransaction, Product}
-import scalafx.animation.PauseTransition
+import scalafx.application.Platform
 import scalafx.beans.property.{ObjectProperty, StringProperty}
-import scalafx.util.Duration
 import scalafxml.core.macros.sfxml
 
 import scala.collection.convert.ImplicitConversions.`collection AsScalaIterable`
@@ -86,7 +85,7 @@ class PaymentController(
 
   def handleConfirmPayment(): Unit = {
     val payableAmount = total.text.value.toDouble
-    val paymentAmount =  Try(paymentAmountField.text.value.toDouble).getOrElse(0.0)
+    val paymentAmount = Try(paymentAmountField.text.value.toDouble).getOrElse(0.0)
 
     if (paymentAmount < payableAmount) {
       val alert = new Alert(Alert.AlertType.Warning) {
@@ -99,26 +98,41 @@ class PaymentController(
       return
     }
 
-    val orderItems = checkOrderTable.getItems.map { case (product, quantity) =>
-      (product, quantity, product.price * quantity)
-    }.toList
+    val confirmationAlert = new Alert(Alert.AlertType.Confirmation) {
+      initOwner(MainApp.stage)
+      title = "Confirm Payment"
+      headerText = "Are you sure you want to proceed with the payment?"
+      contentText = "Please confirm your action."
+    }
+
+    val result = confirmationAlert.showAndWait()
+    if (result.contains(ButtonType.OK)) {
+      val orderItems = checkOrderTable.getItems.map { case (product, quantity) =>
+        (product, quantity, product.price * quantity)
+      }.toList
 
 
-    val order = new OrderTransaction(
-      orderItems,
-      subTotal.text.value.toDouble,
-      serviceCharge.text.value.toDouble,
-      sstCharge.text.value.toDouble,
-      total.text.value.toDouble,
-      paymentMethod.selectedToggle.value.asInstanceOf[javafx.scene.control.RadioButton].getText,
-      paymentAmountField.text.value.toDouble,
-      changeAmountField.text.value.toDouble,
-      MainApp.isTakeAwayChecked.toString.toBoolean
-    )
+      val order = new OrderTransaction(
+        orderItems,
+        subTotal.text.value.toDouble,
+        serviceCharge.text.value.toDouble,
+        sstCharge.text.value.toDouble,
+        total.text.value.toDouble,
+        paymentMethod.selectedToggle.value.asInstanceOf[javafx.scene.control.RadioButton].getText,
+        paymentAmountField.text.value.toDouble,
+        changeAmountField.text.value.toDouble,
+        MainApp.isTakeAwayChecked.toString.toBoolean
+      )
 
-    // Save the order
-    order.save()
-    MainApp.currentOrderItems.clear()
-    paymentStage.close()
+      // Save the order
+      val orderId = order.save()
+      MainApp.currentOrderItems.clear()
+      paymentStage.close()
+
+      // Ensure that it work smoothly after close the payment stage
+      Platform.runLater {
+        MainApp.showReceipt(orderId)
+      }
+    }
   }
 }

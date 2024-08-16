@@ -8,8 +8,8 @@ import scalafx.scene.image.Image
 import scalafx.Includes._
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 import javafx.{scene => jfxs}
-import my.ray.app.model.{Beverage, Dessert, MainCourse, Merchandise, Product, Salad, Table}
-import my.ray.app.view.{LoginController, PaymentController, ProductCardController, ProductController, TableSelectionController}
+import my.ray.app.model.{Beverage, Dessert, MainCourse, Merchandise, OrderTransaction, Product, Salad, Table}
+import my.ray.app.view.{LoginController, PaymentController, ProductCardController, ProductController, ReceiptController, TableSelectionController}
 import scalafx.animation.{PauseTransition, ScaleTransition}
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.{BorderPane, StackPane}
@@ -235,6 +235,38 @@ object MainApp extends JFXApp {
     paymentStage.showAndWait()
 
   }
-  //First Page
+
+
+  def showReceipt(orderID: String): Unit = {
+    val resource = getClass.getResource("view/Receipt.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+
+    val orderOption = OrderTransaction.findById(orderID)
+    orderOption match {
+      case Some(order) =>
+        val controller = loader.getController[ReceiptController#Controller]
+        controller.setOrderTransaction(order)
+
+        // Create a new Stage for the popup
+        val receiptStage = new Stage() {
+          initModality(Modality.ApplicationModal)
+          initOwner(stage)
+          initStyle(StageStyle.UTILITY)
+          title = "Receipt"
+          scene = new Scene(roots)
+        }
+
+        // Show the popup
+        receiptStage.showAndWait()
+
+      case None =>
+        // Handle the case when the order is not found
+        println(s"Order with ID $orderID not found.")
+    }
+  }
+
   showLogin()
+//  showReceipt("f7f43413-a0c9-4018-b24d-d1123a1beb4a")
 }

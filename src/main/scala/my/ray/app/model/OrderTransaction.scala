@@ -37,9 +37,12 @@ case class OrderTransaction(
   var createdBy = ObjectProperty(SessionManager.getCurrentUser.map(_.userId).getOrElse("Unknown"))
   var status =  StringProperty("ACTIVE")
 
-  def save(): Unit = {
+  def save(): String = {
     saveOrderHeader()
     saveOrderDetails()
+
+    //Return orderID
+    orderId.value
   }
 
   private def saveOrderHeader(): Unit = {
@@ -97,17 +100,7 @@ object OrderTransaction extends Database {
       isTakeAwayS,
     ) {
       orderId.value = orderIdS
-//      orderItems.value = ObservableBuffer(orderItemsS: _*)
-//      subTotal.value = subTotalS
-//      serviceCharge.value = serviceChargeS
-//      sstCharge.value = sstChargeS
-//      total.value = totalS
-//      paymentMethod.value = paymentMethodS
-//      paymentAmount.value = paymentAmountS
-//      changeAmount.value = changeAmountS
-//      isTakeAway.value = isTakeAwayS
       salesDate.value = salesDateS
-//      createdBy.value = createdByS
     }
   }
 
@@ -145,6 +138,51 @@ object OrderTransaction extends Database {
         case e: SQLException if e.getSQLState == "X0Y32" =>
         case e: SQLException =>
           println(s"SQL Error: ${e.getMessage}")
+      }
+    }
+  }
+
+  def findById(orderId: String): Option[OrderTransaction] = {
+    DB readOnly { implicit session =>
+      val header = sql"""
+        select * from Txn_order_header where order_id = $orderId and status = 'ACTIVE'
+      """.map(rs => (
+        rs.string("order_id"),
+        rs.double("sub_total"),
+        rs.double("service_charge"),
+        rs.double("sst_charge"),
+        rs.double("total"),
+        rs.string("payment_method"),
+        rs.double("payment_amount"),
+        rs.double("change_amount"),
+        rs.boolean("is_take_away"),
+        rs.localDateTime("sales_date"),
+        rs.string("created_by")
+      )).single.apply()
+
+      val details = sql"""
+        select * from Txn_order_detail where order_id = $orderId
+      """.map(rs => (
+        Product(rs.string("product_id"), rs.string("product_name"), rs.double("price"), "", 0, null, ""),
+        rs.int("quantity"),
+        rs.double("price")
+      )).list.apply()
+
+      header.map { case (orderId, subTotal, serviceCharge, sstCharge, total, paymentMethod, paymentAmount, changeAmount, isTakeAway, salesDate, createdBy) =>
+        OrderTransaction(
+          orderId,
+          details,
+          subTotal,
+          serviceCharge,
+          sstCharge,
+          total,
+          paymentMethod,
+          paymentAmount,
+          changeAmount,
+          isTakeAway,
+          salesDate,
+          User(createdBy, "", "", "", LocalDateTime.now(), "", "", "", "", LocalDateTime.now(), LocalDateTime.now(), "")
+        )
       }
     }
   }

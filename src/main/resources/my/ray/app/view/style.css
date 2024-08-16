@@ -171,3 +171,44 @@
 .changeTextField{
     -fx-background-color: #b7cae4;
 }
+
+.receiptTable {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+}
+
+.receiptTable .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.receiptTable .column-header {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+    -fx-padding: 5px;
+    -fx-wrap-text: true;
+}
+
+.receiptTable .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-border-color: transparent;
+}
+
+.receiptTable .table-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-border-color: transparent;
+}
+
+.receiptTable .scroll-bar:vertical, .receiptTable .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+}

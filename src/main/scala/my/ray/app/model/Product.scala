@@ -22,3 +22,14 @@ abstract class Product(
   def imageProperty: ObjectProperty[Image] = new ObjectProperty(this, "imagePath", imagePath)
 }
 
+object Product {
+  def apply(
+             id: String,
+             name: String,
+             price: Double,
+             description: String,
+             stock: Int,
+             imagePath: Image,
+             status: String
+           ): Product = new Product(id, name, price, description, stock, imagePath, status) {}
+}

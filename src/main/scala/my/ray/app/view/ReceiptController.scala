@@ -18,6 +18,7 @@ class ReceiptController(
                          private val total: Label,
                          private val payment: Label,
                          private val change: Label,
+                         private val paymentMethod: Label,
                          private val productTable: TableView[(Product, Int, Double)],
                          private val itemColumn: TableColumn[(Product, Int, Double), String],
                          private val qtyColumn: TableColumn[(Product, Int, Double), Int],
@@ -32,6 +33,7 @@ class ReceiptController(
     total.text = f"${orderTransaction.total.value}%.2f"
     payment.text = f"${orderTransaction.paymentAmount.value}%.2f"
     change.text = s"-${f"${orderTransaction.changeAmount.value}%.2f"}"
+    paymentMethod.text = s"(${orderTransaction.paymentMethod.value})"
 
     // Populate the TableView
     productTable.items = ObservableBuffer(orderTransaction.orderItems.value: _*)
