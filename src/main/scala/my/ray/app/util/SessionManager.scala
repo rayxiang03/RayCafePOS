@@ -1,34 +1,30 @@
 package my.ray.app.util
 
+import my.ray.app.model.User
 import scala.collection.mutable
 
 object SessionManager {
 
-  // A mutable map to store session IDs and associated user IDs
-  private val sessions = mutable.Map[String, String]()
+  // A mutable map to store session IDs and associated user
+  private val sessions = mutable.Map[String, User]()
 
   // The current session ID (single active session)
   private var currentSessionId: Option[String] = None
 
-  // Generate a new session ID (for simplicity, using a random UUID)
+  // Generate a new session ID
   private def generateSessionId(): String = java.util.UUID.randomUUID().toString
 
-  // Start a new session for a user ID
-  def startSession(userId: String): String = {
+  // Start a new session for a user
+  def startSession(user: User): String = {
     // Invalidate any existing session
     endSession()
 
     // Generate a new session ID and store it
     val sessionId = generateSessionId()
     currentSessionId = Some(sessionId)
-    sessions(sessionId) = userId
+    sessions(sessionId) = user
     println("Current Session: " + sessions)
     sessionId
-  }
-
-  // Retrieve the user ID associated with the current session ID
-  def getCurrentUserId: Option[String] = {
-    currentSessionId.flatMap(sessions.get)
   }
 
   // End the current session
@@ -40,6 +36,8 @@ object SessionManager {
     }
   }
 
-  def isValidSession: Boolean = currentSessionId.isDefined
+  def getCurrentUser: Option[User] = {
+    currentSessionId.flatMap(sessions.get)
+  }
 
 }

@@ -2,7 +2,6 @@ package my.ray.app.model
 
 import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalikejdbc._
-
 import java.sql.SQLException
 import java.time.LocalDateTime
 import java.util.UUID
@@ -22,20 +21,17 @@ case class User(
                  updatedDate: LocalDateTime,
                  role: String
                ) {
-
-
-
   val userIdProperty = new StringProperty(userId)
-  val userNameProperty = new StringProperty(userName)
-  val telNoProperty = new StringProperty(telNo)
-  val icNoProperty = new StringProperty(icNo)
-  val dobProperty = ObjectProperty[LocalDateTime](dob)
-  val addressProperty = new StringProperty(address)
-  val emailProperty = new StringProperty(email)
-  val passwordProperty = new StringProperty(password)
-  val statusProperty = new StringProperty("ACTIVE")
+  var userNameProperty = new StringProperty(userName)
+  var telNoProperty = new StringProperty(telNo)
+  var icNoProperty = new StringProperty(icNo)
+  var dobProperty = ObjectProperty[LocalDateTime](dob)
+  var addressProperty = new StringProperty(address)
+  var emailProperty = new StringProperty(email)
+  var passwordProperty = new StringProperty(password)
+  var statusProperty = new StringProperty("ACTIVE")
   val createdDateProperty = ObjectProperty[LocalDateTime](LocalDateTime.now())
-  val updatedDateProperty = ObjectProperty[LocalDateTime](LocalDateTime.now())
+  var updatedDateProperty = ObjectProperty[LocalDateTime](LocalDateTime.now())
   val roleProperty = new StringProperty(role)
 
 
