@@ -42,6 +42,7 @@ class OrderController(
   isTakeAway.selected.onChange { (_, _, newValue) =>
     tableSelectionPane.disable = newValue
     updateTotals()
+    saveTakeawayStatus()
   }
 
   // Listener for row selection
@@ -56,7 +57,6 @@ class OrderController(
   }
 
   def handleCategoryChange(event: ActionEvent): Unit = {
-    saveTakeawayStatus()
     val button = event.getSource.asInstanceOf[jfxs.control.Button]
     MainApp.showOrderCategory(button.getText)
   }
@@ -151,11 +151,13 @@ class OrderController(
       alert.showAndWait()
       return
     }
+
     val subtotalValue = subTotal.text.value.toDouble
     val serviceChargeValue = serviceCharge.text.value.toDouble
     val sstValue = sstCharge.text.value.toDouble
     val totalValue = total.text.value.toDouble
     val currentOrderItemsList = currentOrderItems.toList
+    val takeAwayValue = takeAwayStatus.toString
 
     MainApp.showPaymentPage(currentOrderItemsList, subtotalValue, serviceChargeValue, sstValue, totalValue)
   }

@@ -239,9 +239,9 @@ class LoginController(
       showAlert(AlertType.Error, "Password must be at least 8 characters long.")
     } else {
       validateCredentials(email, password) match {
-        case Some(userName) =>
-          SessionManager.startSession(userName)
-          showSuccessAlert(userName)
+        case Some(user) =>
+          SessionManager.startSession(user)
+          showSuccessAlert(user.userName)
         case None =>
           showAlert(AlertType.Error, "Invalid email or password.")
       }
@@ -265,11 +265,8 @@ class LoginController(
     password.length >= 8
   }
 
-  def validateCredentials(email: String, password: String): Option[String] = {
-    User.findByEmail(email).flatMap { user =>
-      if (user.password == password)
-        Some(user.userName) else None
-    }
+  def validateCredentials(email: String, password: String): Option[User] = {
+    User.findByEmail(email).filter(_.password == password)
   }
 
   def showSuccessAlert(userName: String): Unit = {
