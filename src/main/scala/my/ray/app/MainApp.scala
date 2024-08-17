@@ -1,5 +1,6 @@
 package my.ray.app
 
+import javafx.scene.paint.Color
 import my.ray.app.util.Database
 import scalafx.application.{JFXApp, Platform}
 import scalafx.application.JFXApp.PrimaryStage
@@ -281,6 +282,30 @@ object MainApp extends JFXApp {
     loader.load()
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.setCenter(roots)
+  }
+
+  def showLoadingPopup(): Stage = {
+    val resource = getClass.getResource("view/LoadingPanel.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val loadingPane = loader.getRoot[jfxs.layout.AnchorPane]
+
+    val loadingStage = new Stage() {
+      initModality(Modality.ApplicationModal)
+      initOwner(stage)
+      initStyle(StageStyle.UNDECORATED)
+      scene = new Scene(loadingPane) {
+        fill = null
+      }
+    }
+
+
+    loadingStage.show()
+    loadingStage
+  }
+
+  def hideLoadingPopup(loadingStage: Stage): Unit = {
+    loadingStage.close()
   }
 
   showLogin()

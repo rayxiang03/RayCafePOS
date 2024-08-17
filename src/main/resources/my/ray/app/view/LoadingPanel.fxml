@@ -2,9 +2,23 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-    <Label text="Loading..." />
-    <ProgressIndicator prefHeight="32.0" prefWidth="35.0" />
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="90.0" prefWidth="120.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="182.0" fitWidth="367.0" layoutX="-173.0" layoutY="-80.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../../images/Background_Paper.png" />
+         </image>
+      </ImageView>
+      <ProgressIndicator layoutX="43.0" layoutY="45.0" mouseTransparent="true" prefHeight="35.0" prefWidth="35.0" />
+      <Label layoutX="25.0" layoutY="10.0" text="Loading...">
+         <font>
+            <Font name="Dubai Regular" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
