@@ -164,7 +164,7 @@
                            </GridPane.margin>
                         </Label>
                         <Label fx:id="tableAvailabilityLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="tableDetailsLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="tableDetailsLabel" prefHeight="68.0" prefWidth="117.0" style="-fx-text-fill: blue; -fx-font-weight: bold; -fx-underline: true;" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                      <padding>
                         <Insets top="10.0" />

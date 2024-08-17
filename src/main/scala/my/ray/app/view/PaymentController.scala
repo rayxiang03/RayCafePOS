@@ -3,7 +3,7 @@ package my.ray.app.view
 import my.ray.app.MainApp
 import scalafx.scene.control.{Alert, ButtonType, Label, TableColumn, TableView, TextField, ToggleGroup}
 import scalafx.stage.Stage
-import my.ray.app.model.{OrderTransaction, Product}
+import my.ray.app.model.{OrderTransaction, Product, Table}
 import scalafx.application.Platform
 import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalafxml.core.macros.sfxml
@@ -29,6 +29,11 @@ class PaymentController(
                        ) {
 
   var paymentStage: Stage = _
+  var tableNo: Option[String] = None
+
+  def setTableNo(tableNo: Option[String]): Unit = {
+    this.tableNo = tableNo
+  }
 
   // Set up table columns
   numberColumn.cellValueFactory = cellData => ObjectProperty(checkOrderTable.getItems.indexOf(cellData.value) + 1)
@@ -129,9 +134,26 @@ class PaymentController(
       MainApp.currentOrderItems.clear()
       paymentStage.close()
 
+      // Update table availability and details if not a takeaway
+      if (!MainApp.isTakeAwayChecked) {
+        tableNo match {
+          case Some(tableId) =>
+            Table.getTableById(tableId).foreach { table =>
+              table.availability.value = false
+              table.details.value = orderId
+              table.save()
+            }
+          case None => // Do nothing if no table is selected
+        }
+      }
+
+      // Refresh table details
+      MainApp.refreshTableDetails()
+
       // Ensure that it work smoothly after close the payment stage
       Platform.runLater {
         MainApp.showReceipt(orderId)
+        MainApp.showOrderPage() //Refresh the tableNo
       }
     }
   }

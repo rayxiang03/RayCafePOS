@@ -5,7 +5,7 @@ import my.ray.app.MainApp
 import my.ray.app.model.{Product, Table}
 import scalafx.beans.property.ObjectProperty
 import scalafxml.core.macros.sfxml
-import scalafx.scene.control.{Alert, CheckBox, MenuItem, SplitMenuButton, TableColumn, TableView}
+import scalafx.scene.control.{Alert, CheckBox, Label, MenuItem, SplitMenuButton, TableColumn, TableView}
 import scalafx.scene.text.Text
 import javafx.{scene => jfxs}
 import scalafx.scene.layout.Pane
@@ -35,6 +35,9 @@ class OrderController(
 
   // ObservableBuffer for all tables
   private val availableTable = MainApp.availableTable
+
+  // Set placeholder text for empty table
+  currentOrderTable.placeholder = new Label("Feed me some items >_<")
 
 
   // Recalculate totals whenever the order items change or the checkbox is toggled
@@ -152,13 +155,25 @@ class OrderController(
       return
     }
 
+    if (!isTakeAway.selected.value && chooseTableNo.text.value == "#") {
+      val alert = new Alert(Alert.AlertType.Warning) {
+        initOwner(MainApp.stage)
+        title = "Table Not Selected"
+        headerText = "No table selected for DINE IN"
+        contentText = "Please select a table before proceeding to payment."
+      }
+      alert.showAndWait()
+      return
+    }
+
     val subtotalValue = subTotal.text.value.toDouble
     val serviceChargeValue = serviceCharge.text.value.toDouble
     val sstValue = sstCharge.text.value.toDouble
     val totalValue = total.text.value.toDouble
     val currentOrderItemsList = currentOrderItems.toList
+    val tableNo = if (!isTakeAway.selected.value) Some(chooseTableNo.text.value) else None
 
-    MainApp.showPaymentPage(currentOrderItemsList, subtotalValue, serviceChargeValue, sstValue, totalValue)
+    MainApp.showPaymentPage(currentOrderItemsList, subtotalValue, serviceChargeValue, sstValue, totalValue, tableNo)
   }
 
   updateTotals()

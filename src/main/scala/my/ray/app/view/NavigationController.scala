@@ -4,6 +4,7 @@ import javafx.fxml.FXML
 import my.ray.app.MainApp
 import my.ray.app.util.SessionManager
 import scalafx.application.Platform
+import scalafx.stage.Stage
 import scalafxml.core.macros.sfxml
 
 
@@ -20,8 +21,20 @@ class NavigationController {
     MainApp.showOrderPage()
   }
 
+  def getOrderHistory(): Unit = {
+    val loadingStage = MainApp.showLoadingPopup()
+    Platform.runLater(() => {
+      MainApp.showOrderHistoryPage()
+      MainApp.hideLoadingPopup(loadingStage)
+    })
+  }
+
   def getTableManagement() = {
-    MainApp.showTablePage()
+    val loadingStage = MainApp.showLoadingPopup()
+    Platform.runLater(() => {
+      MainApp.showTablePage()
+      MainApp.hideLoadingPopup(loadingStage)
+    })
   }
 
   def logout(): Unit = {

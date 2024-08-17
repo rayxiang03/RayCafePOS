@@ -16,38 +16,17 @@ case class Table(val _tableId: String, val _pax: Int, val _availability: Boolean
   var availability = new BooleanProperty(this, "availability", _availability)
   var details = new StringProperty(_details)
 
-  // Save or update the table record
+  // Update the table record
   def save(): Try[Int] = {
-    if (!isExist) {
-      Try(DB autoCommit { implicit session =>
-        sql"""
-          INSERT INTO tables (table_id, pax, availability, details)
-          VALUES (${tableId.value}, ${pax.value}, ${availability.value}, ${details.value})
-        """.update.apply()
-      })
-    } else {
-      Try(DB autoCommit { implicit session =>
-        sql"""
-          UPDATE tables
-          SET pax = ${pax.value}, availability = ${availability.value}, details = ${details.value}
-          WHERE table_id = ${tableId.value}
-        """.update.apply()
-      })
-    }
+    Try(DB autoCommit { implicit session =>
+      sql"""
+        UPDATE tables
+        SET pax = ${pax.value}, availability = ${availability.value}, details = ${details.value}
+        WHERE table_id = ${tableId.value}
+      """.update.apply()
+    })
   }
 
-  // Delete the table record
-  def delete(): Try[Int] = {
-    if (isExist) {
-      Try(DB autoCommit { implicit session =>
-        sql"""
-          DELETE FROM tables WHERE table_id = ${tableId.value}
-        """.update.apply()
-      })
-    } else {
-      Failure(new Exception("Table not exists in the database"))
-    }
-  }
 
   // Check if the table exists in the database
   def isExist: Boolean = {
@@ -59,6 +38,13 @@ case class Table(val _tableId: String, val _pax: Int, val _availability: Boolean
       case Some(_) => true
       case None => false
     }
+  }
+
+
+  def release(): Try[Int] = {
+    availability.value = true
+    details.value = null
+    save()
   }
 }
 

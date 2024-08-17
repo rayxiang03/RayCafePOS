@@ -41,7 +41,7 @@ case class OrderTransaction(
     saveOrderHeader()
     saveOrderDetails()
 
-    //Return orderID
+    //Return orderID for display receipt
     orderId.value
   }
 
@@ -101,6 +101,7 @@ object OrderTransaction extends Database {
     ) {
       orderId.value = orderIdS
       salesDate.value = salesDateS
+      createdBy.value = createdByS.userId
     }
   }
 
@@ -169,6 +170,53 @@ object OrderTransaction extends Database {
       )).list.apply()
 
       header.map { case (orderId, subTotal, serviceCharge, sstCharge, total, paymentMethod, paymentAmount, changeAmount, isTakeAway, salesDate, createdBy) =>
+        OrderTransaction(
+          orderId,
+          details,
+          subTotal,
+          serviceCharge,
+          sstCharge,
+          total,
+          paymentMethod,
+          paymentAmount,
+          changeAmount,
+          isTakeAway,
+          salesDate,
+          User(createdBy, "", "", "", LocalDateTime.now(), "", "", "", "", LocalDateTime.now(), LocalDateTime.now(), "")
+        )
+      }
+    }
+  }
+
+  def getAllOrders(): List[OrderTransaction] = {
+    DB readOnly { implicit session =>
+      val headers =
+        sql"""
+        select * from Txn_order_header order by sales_date desc
+      """.map(rs => (
+          rs.string("order_id"),
+          rs.double("sub_total"),
+          rs.double("service_charge"),
+          rs.double("sst_charge"),
+          rs.double("total"),
+          rs.string("payment_method"),
+          rs.double("payment_amount"),
+          rs.double("change_amount"),
+          rs.boolean("is_take_away"),
+          rs.localDateTime("sales_date"),
+          rs.string("created_by")
+        )).list.apply()
+
+      headers.map { case (orderId, subTotal, serviceCharge, sstCharge, total, paymentMethod, paymentAmount, changeAmount, isTakeAway, salesDate, createdBy) =>
+        val details =
+          sql"""
+          select * from Txn_order_detail where order_id = $orderId
+        """.map(rs => (
+            Product(rs.string("product_id"), rs.string("product_name"), rs.double("price"), "", 0, null, ""),
+            rs.int("quantity"),
+            rs.double("price")
+          )).list.apply()
+
         OrderTransaction(
           orderId,
           details,

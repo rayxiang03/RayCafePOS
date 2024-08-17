@@ -10,6 +10,7 @@ import scalafx.scene.paint.Color
 import scalafxml.core.macros.sfxml
 
 import scala.collection.convert.ImplicitConversions.`collection AsScalaIterable`
+import scala.util.{Failure, Success}
 
 @sfxml
 class TableSelectionController(
@@ -76,7 +77,8 @@ class TableSelectionController(
     tableNoLabel.text = table.tableId.value
     tablePaxLabel.text = table.pax.value.toString
     tableAvailabilityLabel.text = if (table.availability.value) "Available" else "In Use"
-    tableDetailsLabel.text = table.details.value
+    tableDetailsLabel.text = if (Option(table.details.value).exists(_.nonEmpty)) "Receipt" else ""
+    tableDetailsLabel.onMouseClicked = _ => MainApp.showReceipt(table.details.value)
   }
 
   private def handleTableClick(shape: Shape, table: Table): Unit = {
@@ -116,25 +118,57 @@ class TableSelectionController(
   }
 
   def handleModifyAdd(): Unit = {
-
     pageSource match {
       case "from_Navigation" =>
-        modifyButton.text = "MODIFY TABLE"
+        modifyButton.text = "RELEASE TABLE"
       case "from_Order" =>
         modifyButton.text = "SELECT TABLE"
     }
 
     selectedTable.foreach { table =>
-      if (table.availability.value && pageSource == "from_Order") {
-        onTableSelected(table) // Call the callback function
-        MainApp.popupStage.close()
-      } else if (pageSource == "from_Order") {
-        new Alert(AlertType.Warning) {
-          initOwner(MainApp.stage)
-          title = "Table Unavailable"
-          headerText = "Selected Table is Unavailable"
-          contentText = s"Table ${table.tableId.value} is currently in use."
-        }.showAndWait()
+      if (pageSource == "from_Order") {
+        if (table.availability.value) {
+          onTableSelected(table)
+          MainApp.popupStage.close()
+        } else {
+          new Alert(AlertType.Warning) {
+            initOwner(MainApp.stage)
+            title = "Table Unavailable"
+            headerText = "Selected Table is Unavailable"
+            contentText = s"Table ${table.tableId.value} is currently in use."
+          }.showAndWait()
+        }
+      } else if (pageSource == "from_Navigation") {
+        if (!table.availability.value) {
+          table.release() match {
+            case Success(_) =>
+              new Alert(AlertType.Information) {
+                initOwner(MainApp.stage)
+                title = "Table Released"
+                headerText = "Table Released Successfully"
+                contentText = s"Table ${table.tableId.value} has been released."
+              }.showAndWait()
+              resetTableColors() // Update the table colors
+              clearLabels() // Clear the labels
+              modifyButton.visible = false // Hide the modify button
+
+            case Failure(exception) =>
+              new Alert(AlertType.Error) {
+                initOwner(MainApp.stage)
+                title = "Error"
+                headerText = "Failed to Release Table"
+                contentText = s"An error occurred: ${exception.getMessage}"
+              }.showAndWait()
+
+          }
+        } else {
+          new Alert(AlertType.Warning) {
+            initOwner(MainApp.stage)
+            title = "RELEASE FAILED"
+            headerText = "Selected Table is already available"
+            contentText = s"Table ${table.tableId.value} is ready to use !"
+          }.showAndWait()
+        }
       }
     }
   }
