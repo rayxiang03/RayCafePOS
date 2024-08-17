@@ -211,8 +211,15 @@ object MainApp extends JFXApp {
     }
   }
 
+  def refreshTableDetails(): Unit = {
+    tableDetails.clear()
+    tableDetails ++= Table.getAllTables
+    availableTable.clear()
+    availableTable ++= Table.getAvailableTables
+  }
 
-  def showPaymentPage(currentOrderItems: List[(Product, Int)], subTotal: Double, serviceCharge: Double, sst: Double, total: Double): Unit = {
+
+  def showPaymentPage(currentOrderItems: List[(Product, Int)], subTotal: Double, serviceCharge: Double, sst: Double, total: Double, tableNo: Option[String] = None): Unit = {
     val resource = getClass.getResource("view/Payment.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load()
@@ -231,6 +238,7 @@ object MainApp extends JFXApp {
     controller.setOrderItems(currentOrderItems)
     controller.setAmounts(subTotal, serviceCharge, sst, total)
     controller.paymentStage = paymentStage
+    controller.setTableNo(tableNo)
 
     paymentStage.showAndWait()
 
@@ -267,6 +275,13 @@ object MainApp extends JFXApp {
     }
   }
 
+  def showOrderHistoryPage(): Unit = {
+    val resource = getClass.getResource("view/OrderHistory.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+    this.roots.setCenter(roots)
+  }
+
   showLogin()
-//  showReceipt("f7f43413-a0c9-4018-b24d-d1123a1beb4a")
 }

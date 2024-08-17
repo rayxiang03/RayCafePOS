@@ -61,7 +61,7 @@
                               <Font name="SansSerif Regular" size="11.0" />
                            </font>
                         </Label>
-                        <Label fx:id="salesDate" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="198.0" layoutY="218.0" prefHeight="34.0" prefWidth="75.0" text="DateTime" wrapText="true">
+                        <Label fx:id="salesDate" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="198.0" layoutY="218.0" prefHeight="34.0" prefWidth="75.0" text="-" wrapText="true">
                            <font>
                               <Font name="SansSerif Bold" size="12.0" />
                            </font>
@@ -135,7 +135,7 @@
                                     <Insets bottom="5.0" top="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="subTotal" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="69.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.vgrow="SOMETIMES">
+                              <Label fx:id="subTotal" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="69.0" text="-" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.vgrow="SOMETIMES">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" top="5.0" />
                                  </GridPane.margin>
@@ -143,7 +143,7 @@
                                     <Insets bottom="5.0" top="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="serviceCharge" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="96.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
+                              <Label fx:id="serviceCharge" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="96.0" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" top="5.0" />
                                  </GridPane.margin>
@@ -151,7 +151,7 @@
                                     <Insets bottom="5.0" top="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="sstCharge" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="75.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="SOMETIMES">
+                              <Label fx:id="sstCharge" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="75.0" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="SOMETIMES">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" top="5.0" />
                                  </GridPane.margin>
@@ -159,7 +159,7 @@
                                     <Insets bottom="5.0" top="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="total" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="95.0" text="Label" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.vgrow="SOMETIMES">
+                              <Label fx:id="total" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="95.0" text="-" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.vgrow="SOMETIMES">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -186,7 +186,7 @@
                                     <Insets bottom="5.0" top="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="payment" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="79.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="SOMETIMES">
+                              <Label fx:id="payment" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="79.0" text="-" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="SOMETIMES">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" top="5.0" />
                                  </GridPane.margin>
@@ -194,7 +194,7 @@
                                     <Insets bottom="5.0" top="5.0" />
                                  </padding>
                               </Label>
-                              <Label fx:id="change" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="75.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.vgrow="SOMETIMES">
+                              <Label fx:id="change" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="75.0" text="-" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.vgrow="SOMETIMES">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" top="5.0" />
                                  </GridPane.margin>

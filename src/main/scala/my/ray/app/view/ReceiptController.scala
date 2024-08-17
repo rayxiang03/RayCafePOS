@@ -24,6 +24,9 @@ class ReceiptController(
                          private val qtyColumn: TableColumn[(Product, Int, Double), Int],
                          private val totalColumn: TableColumn[(Product, Int, Double), String]
                        ) {
+
+  productTable.placeholder = new Label("Please Select a Transaction.")
+
   def setOrderTransaction(orderTransaction: OrderTransaction): Unit = {
     orderNo.text = orderTransaction.orderId.value
     salesDate.text = orderTransaction.salesDate.value.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
@@ -34,6 +37,7 @@ class ReceiptController(
     payment.text = f"${orderTransaction.paymentAmount.value}%.2f"
     change.text = s"-${f"${orderTransaction.changeAmount.value}%.2f"}"
     paymentMethod.text = s"(${orderTransaction.paymentMethod.value})"
+
 
     // Populate the TableView
     productTable.items = ObservableBuffer(orderTransaction.orderItems.value: _*)

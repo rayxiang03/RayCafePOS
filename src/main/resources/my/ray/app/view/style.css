@@ -212,3 +212,70 @@
     -fx-max-width: 0;
     -fx-max-height: 0;
 }
+
+.history-table {
+    -fx-background-color: rgba(210, 180, 140, 0.9); /* Light brown background */
+    -fx-border-color: #cdba9c; /* SaddleBrown border */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #8e7d64; /* Dark brown text */
+}
+
+.history-table .column-header-background {
+    -fx-background-color: #e6bc9c; /* SaddleBrown header background */
+}
+
+.history-table .column-header, .history-table .filler {
+    -fx-background-color: #b6917c; /* SaddleBrown header background */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-alignment: center;
+}
+
+.history-table .table-row-cell:odd {
+    -fx-background-color: rgba(245, 222, 179, 0.9); /* Wheat background for odd rows */
+}
+
+.history-table .table-row-cell:even {
+    -fx-background-color: rgba(255, 228, 196, 0.9); /* Bisque background for even rows */
+}
+
+.history-table .table-row-cell:selected {
+    -fx-background-color: #e1b89c; /* Chocolate background for selected row */
+    -fx-text-fill: white;
+}
+
+.history-table .table-cell {
+    -fx-padding: 8px;
+    -fx-border-color: #d3a78c; /* SaddleBrown border */
+    -fx-border-width: 0 0 1px 0;
+    -fx-font-size: 14px;
+    -fx-text-fill: #4B2E2E; /* Dark brown text */
+}
+
+.history-table .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+}
+
+/* Style vertical scrollbar */
+.history-table .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px; /* Thinner scrollbar */
+}
+
+.history-table .scroll-bar:vertical .thumb {
+    -fx-background-color: #7a6953; /* SaddleBrown thumb */
+    -fx-background-insets: 2;
+    -fx-background-radius: 2;
+}
+
+.history-table .scroll-bar:vertical .track {
+    -fx-background-color: #e2e2e2; /* Light grey track */
+    -fx-background-radius: 2
+}
