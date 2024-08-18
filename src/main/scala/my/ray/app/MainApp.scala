@@ -1,7 +1,6 @@
 package my.ray.app
 
-import javafx.scene.paint.Color
-import my.ray.app.util.Database
+import my.ray.app.util.{Database, SessionManager}
 import scalafx.application.{JFXApp, Platform}
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
@@ -13,6 +12,8 @@ import my.ray.app.model.{Beverage, Dessert, MainCourse, Merchandise, OrderTransa
 import my.ray.app.view.{LoginController, PaymentController, ProductCardController, ProductController, ReceiptController, TableSelectionController}
 import scalafx.animation.{PauseTransition, ScaleTransition}
 import scalafx.collections.ObservableBuffer
+import scalafx.scene.control.Alert
+import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.layout.{BorderPane, StackPane}
 import scalafx.stage.{Modality, Stage, StageStyle}
 import scalafx.util.Duration
@@ -197,7 +198,7 @@ object MainApp extends JFXApp {
         newRootPane.getChildren.add(fullTablePaneCopy)
 
         // Create a new Stage (popup) for table selection
-         popupStage = new Stage() {
+        popupStage = new Stage() {
           initModality(Modality.ApplicationModal)
           initStyle(StageStyle.UTILITY)
           title = "Select a Table for Order"
@@ -308,5 +309,24 @@ object MainApp extends JFXApp {
     loadingStage.close()
   }
 
-  showLogin()
-}
+  def showReportPage(): Unit = {
+    if (SessionManager.getCurrentUser.exists(_.role == "ADMIN")) {
+
+      val resource = getClass.getResource("view/Report.fxml")
+      val loader = new FXMLLoader(resource, NoDependencyResolver)
+      loader.load()
+      val roots = loader.getRoot[jfxs.layout.AnchorPane]
+      this.roots.setCenter(roots)
+    } else{
+      val alert = new Alert(AlertType.Warning) {
+        initOwner(null)
+        title = "Access Denied"
+        headerText = "You do not have permission to access this page."
+        contentText = "Please login with an admin account to access this page."
+      }
+      alert.showAndWait()
+    }
+  }
+
+    showLogin()
+  }

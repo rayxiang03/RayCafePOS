@@ -37,6 +37,10 @@ class NavigationController {
     })
   }
 
+  def getReport() {
+    MainApp.showReportPage()
+  }
+
   def logout(): Unit = {
     SessionManager.endSession()
     Platform.runLater(() => {
