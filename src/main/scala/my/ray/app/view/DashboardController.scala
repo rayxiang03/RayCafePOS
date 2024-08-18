@@ -45,6 +45,7 @@ class DashboardController(
     val videoPath = getClass.getResource("/videos/coffee_brewing.mp4").toURI.toString
     val media = new Media(videoPath)
     val mediaPlayer = new MediaPlayer(media)
+    mediaPlayer.setAutoPlay(true)
     mediaPlayer.autoPlay = true
     mediaPlayer.cycleCount = MediaPlayer.Indefinite
     advertisementView.setMediaPlayer(mediaPlayer)

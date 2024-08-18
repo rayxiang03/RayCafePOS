@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
@@ -11,27 +10,9 @@
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
-                <Menu mnemonicParsing="false" text="_File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Close">
-                            <accelerator>
-                                <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                            </accelerator></MenuItem>
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="E_dit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                    </items>
-                </Menu>
                 <Menu text="_Help">
                     <items>
                         <MenuItem mnemonicParsing="false" text="About" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Extra">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
                     </items>
                 </Menu>
             </menus>

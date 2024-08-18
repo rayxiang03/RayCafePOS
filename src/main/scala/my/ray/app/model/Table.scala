@@ -59,8 +59,9 @@ object Table extends Database {
           table_id VARCHAR(50) NOT NULL,
           pax INT,
           availability BOOLEAN,
-          details VARCHAR(255),
-          PRIMARY KEY (table_id)
+          details VARCHAR(50),
+          PRIMARY KEY (table_id),
+          foreign key (details) references Txn_order_header(order_id)
         )
       """.execute.apply()
       } catch {

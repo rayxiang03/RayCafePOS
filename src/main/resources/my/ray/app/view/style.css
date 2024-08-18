@@ -285,3 +285,8 @@
     -fx-background-size: cover;
     -fx-background-position: center;
 }
+
+.pie-chart .chart-pie-label {
+    -fx-font-size: 14px;
+    -fx-fill: black;
+}

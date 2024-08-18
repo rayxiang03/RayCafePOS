@@ -7,7 +7,7 @@ import scalikejdbc._
 
 import java.util.UUID
 import java.sql.SQLException
-import java.time.LocalDateTime
+import java.time.{LocalDate, LocalDateTime}
 
 case class OrderTransaction(
                              orderItemsS: List[(Product, Int, Double)],
@@ -35,7 +35,7 @@ case class OrderTransaction(
   var isTakeAway = BooleanProperty(isTakeAwayS)
   var salesDate = ObjectProperty[LocalDateTime](LocalDateTime.now())
   var createdBy = ObjectProperty(SessionManager.getCurrentUser.map(_.userId).getOrElse("Unknown"))
-  var status =  StringProperty("ACTIVE")
+  var status = StringProperty("ACTIVE")
 
   def save(): String = {
     saveOrderHeader()
@@ -121,7 +121,8 @@ object OrderTransaction extends Database {
           is_take_away boolean,
           sales_date timestamp,
           created_by varchar(50) not null,
-          status varchar(20)
+          status varchar(20),
+          foreign key (created_by) references Users(user_id)
         )
         """.execute.apply()
 
@@ -145,29 +146,31 @@ object OrderTransaction extends Database {
 
   def findById(orderId: String): Option[OrderTransaction] = {
     DB readOnly { implicit session =>
-      val header = sql"""
+      val header =
+        sql"""
         select * from Txn_order_header where order_id = $orderId and status = 'ACTIVE'
       """.map(rs => (
-        rs.string("order_id"),
-        rs.double("sub_total"),
-        rs.double("service_charge"),
-        rs.double("sst_charge"),
-        rs.double("total"),
-        rs.string("payment_method"),
-        rs.double("payment_amount"),
-        rs.double("change_amount"),
-        rs.boolean("is_take_away"),
-        rs.localDateTime("sales_date"),
-        rs.string("created_by")
-      )).single.apply()
+          rs.string("order_id"),
+          rs.double("sub_total"),
+          rs.double("service_charge"),
+          rs.double("sst_charge"),
+          rs.double("total"),
+          rs.string("payment_method"),
+          rs.double("payment_amount"),
+          rs.double("change_amount"),
+          rs.boolean("is_take_away"),
+          rs.localDateTime("sales_date"),
+          rs.string("created_by")
+        )).single.apply()
 
-      val details = sql"""
+      val details =
+        sql"""
         select * from Txn_order_detail where order_id = $orderId
       """.map(rs => (
-        Product(rs.string("product_id"), rs.string("product_name"), rs.double("price"), "", 0, null, ""),
-        rs.int("quantity"),
-        rs.double("price")
-      )).list.apply()
+          Product(rs.string("product_id"), rs.string("product_name"), rs.double("price"), "", 0, null, ""),
+          rs.int("quantity"),
+          rs.double("price")
+        )).list.apply()
 
       header.map { case (orderId, subTotal, serviceCharge, sstCharge, total, paymentMethod, paymentAmount, changeAmount, isTakeAway, salesDate, createdBy) =>
         OrderTransaction(
@@ -234,4 +237,35 @@ object OrderTransaction extends Database {
       }
     }
   }
+
+
+  def getTop10MostSoldItemsForDateRange(startDate: LocalDate, endDate: LocalDate): Map[String, Double] = {
+    val startDateTime = startDate.atStartOfDay()
+    val endDateTime = endDate.atTime(23, 59, 59)
+    DB readOnly { implicit session =>
+      sql"""
+      SELECT product_name, SUM(quantity) as total_quantity
+      FROM Txn_order_detail
+      JOIN Txn_order_header ON Txn_order_detail.order_id = Txn_order_header.order_id
+      WHERE sales_date >= $startDateTime AND sales_date <= $endDateTime
+      GROUP BY product_name
+      ORDER BY total_quantity DESC
+      FETCH FIRST 8 ROWS ONLY
+    """.map(rs => rs.string("product_name") -> rs.double("total_quantity")).list.apply().toMap
+    }
+  }
+
+  def getSalesDataForDateRange(startDate: LocalDate, endDate: LocalDate): Map[Int, Double] = {
+    val startDateTime = startDate.atStartOfDay()
+    val endDateTime = endDate.atTime(23, 59, 59)
+    DB readOnly { implicit session =>
+      sql"""
+      SELECT DAY(sales_date) as day, SUM(total) as sales
+      FROM Txn_order_header
+      WHERE sales_date >= $startDateTime AND sales_date <= $endDateTime
+      GROUP BY DAY(sales_date)
+    """.map(rs => rs.int("day") -> rs.double("sales")).list.apply().toMap
+    }
+  }
+
 }

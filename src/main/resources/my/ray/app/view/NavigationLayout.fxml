@@ -90,7 +90,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="78.0" prefWidth="133.0">
                      <children>
-                        <ButtonBar fx:id="nav_report" styleClass="navBar" stylesheets="@style.css">
+                        <ButtonBar fx:id="nav_report" onMouseClicked="#getReport" styleClass="navBar" stylesheets="@style.css">
                            <buttons>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

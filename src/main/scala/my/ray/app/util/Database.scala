@@ -1,7 +1,7 @@
 package my.ray.app.util
 
 import scalikejdbc._
-import my.ray.app.model.{OrderTransaction, Role, Table, User}
+import my.ray.app.model.{OrderTransaction, Table, User}
 
 trait Database {
   val derbyDriverClassname = "org.apache.derby.jdbc.EmbeddedDriver"

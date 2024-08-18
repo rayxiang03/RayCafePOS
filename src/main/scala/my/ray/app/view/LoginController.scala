@@ -58,7 +58,7 @@ class LoginController(
     mediaView.mediaPlayer = mediaPlayer
 
     // Optionally start the video automatically
-    mediaPlayer.autoPlay = true
+    mediaPlayer.setAutoPlay(true)
 
     // Add an onEndOfMedia event handler to replay the video
     mediaPlayer.onEndOfMedia = () => {
