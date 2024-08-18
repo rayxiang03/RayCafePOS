@@ -280,3 +280,8 @@
     -fx-background-radius: 2
 }
 
+.dashboard{
+    -fx-background-image: url("/images/dashboard_bg.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}

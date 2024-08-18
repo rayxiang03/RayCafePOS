@@ -22,16 +22,34 @@ object Beverage{
     val mangoSmoothie: Beverage = new Beverage(
       "B001",
       "Mango Smoothie",
-      5.99,
+      13.99,
       "A delicious and refreshing mango smoothie",
-      10,
+      3,
       new Image(getClass.getResourceAsStream("/images/mango_smoothie.png")),
+      "Active")
+
+    val mixBerrySmoothie: Beverage = new Beverage(
+      "B001",
+      "Mix Berry Smoothie",
+      16.99,
+      "This frozen berry smoothie is thick, creamy and full of delicious mixed berries.",
+      3,
+      new Image(getClass.getResourceAsStream("/images/berry_smoothie.jpg")),
+      "Active")
+
+    val americano: Beverage = new Beverage(
+      "B002",
+      "Americano",
+      4.99,
+      "Espresso shots topped with hot water create a light layer of crema.",
+      30,
+      new Image(getClass.getResourceAsStream("/images/americano.jpg")),
       "Active")
 
     val moccaccino: Beverage = new Beverage(
       "B002",
       "Moccaccino",
-      4.99,
+      9.99,
       "A delicious and refreshing moccaccino",
       10,
       new Image(getClass.getResourceAsStream("/images/moccaccino.png")),
@@ -40,7 +58,7 @@ object Beverage{
     val iceLatte: Beverage = new Beverage(
       "B003",
       "Ice Latte",
-      3.99,
+      7.99,
       "A delicious and refreshing ice latte",
       10,
       new Image(getClass.getResourceAsStream("/images/iced-latte.png")),
@@ -49,7 +67,7 @@ object Beverage{
     val oatmilkMocha: Beverage = new Beverage(
       "B004",
       "Oatmilk Mocha",
-      4.99,
+      12.99,
       "A delicious and refreshing oatmilk mocha",
       10,
       new Image(getClass.getResourceAsStream("/images/Oatmilk-Mocha-Flash-Brew.png")),
@@ -57,7 +75,7 @@ object Beverage{
 
 
   // List of all predefined beverages
-  val beverages: List[Beverage] = List(mangoSmoothie, moccaccino, iceLatte, oatmilkMocha)
+  val beverages: List[Beverage] = List(americano, moccaccino, iceLatte, oatmilkMocha, mixBerrySmoothie, mangoSmoothie)
 
   // Method to get all beverages
   def getAllBeverages: List[Beverage] = {
