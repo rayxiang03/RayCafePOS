@@ -132,7 +132,7 @@ class LoginController(
       val resetScaleTransition = new ScaleTransition(Duration(300), imageView)
       resetScaleTransition.toX = 1.0 // Reset scale to 100%
       resetScaleTransition.toY = 1.0 // Reset scale to 100%
-      resetScaleTransition.interpolator = scalafx.animation.Interpolator.EaseOut // or use another available interpolator
+      resetScaleTransition.interpolator = scalafx.animation.Interpolator.EaseOut
 
       resetScaleTransition.playFromStart() // Reset the image size
     }

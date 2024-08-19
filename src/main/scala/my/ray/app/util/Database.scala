@@ -24,7 +24,7 @@ object Database extends Database {
       if (!tableExists("User")) {
         User.initializeTable()
       }
-      if (!tableExists("Table")) {
+      if (!tableExists("Tables")) {
         Table.initializeTable()
       }
       if (!tableExists("Txn_order_header") || !tableExists("Txn_order_detail")) {
@@ -35,7 +35,7 @@ object Database extends Database {
 
   // Checks if the database is initialized by confirming the presence of all tables
   def hasDBInitialize: Boolean = {
-    tableExists("User") && tableExists("Table") && tableExists("Txn_order_header") && tableExists("Txn_order_detail")
+    tableExists("User") && tableExists("Tables") && tableExists("Txn_order_header") && tableExists("Txn_order_detail")
   }
 
   // Utility function to check if a specific table exists
