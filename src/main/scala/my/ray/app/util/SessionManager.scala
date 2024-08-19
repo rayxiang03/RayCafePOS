@@ -23,14 +23,14 @@ object SessionManager {
     val sessionId = generateSessionId()
     currentSessionId = Some(sessionId)
     sessions(sessionId) = user
-    println("Current Session: " + sessions)
+    println(s"Current Session ID: $sessionId, User: ${user.userName}")
     sessionId
   }
 
   // End the current session
   def endSession(): Unit = {
     currentSessionId.foreach { id =>
-      println("Terminated session: " + sessions)
+      println("Terminated session: " + id)
       sessions.remove(id)
       currentSessionId = None
     }

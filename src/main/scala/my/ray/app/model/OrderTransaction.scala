@@ -133,7 +133,8 @@ object OrderTransaction extends Database {
           product_name varchar(50),
           quantity int,
           price double,
-          foreign key (order_id) references Txn_order_header(order_id)
+          foreign key (order_id) references Txn_order_header(order_id),
+          primary key (order_id, product_id)
         )
         """.execute.apply()
       } catch {

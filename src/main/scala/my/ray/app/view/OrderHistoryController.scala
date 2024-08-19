@@ -1,13 +1,11 @@
 package my.ray.app.view
 
 import my.ray.app.MainApp
-import my.ray.app.MainApp.loader
 import my.ray.app.model.OrderTransaction
 import scalafx.application.Platform
-import scalafx.beans.property.{ObjectProperty, StringProperty}
+import scalafx.beans.property.ObjectProperty
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.control.{TableColumn, TableView}
-import scalafxml.core.FXMLView
 import scalafxml.core.macros.sfxml
 
 import java.net.URL

@@ -14,9 +14,11 @@ trait ChartData[X, Y] {
 
 class SalesData(startDate: LocalDate, endDate: LocalDate) extends ChartData[String, Number] {
   override def getData: Map[String, Number] = {
-    OrderTransaction.getSalesDataForDateRange(startDate, endDate).map {
-      case (day, sales) => day.toString -> sales.asInstanceOf[Number]
-    }
+    OrderTransaction.getSalesDataForDateRange(startDate, endDate)
+      .toSeq
+      .sortBy(_._1) // Sort by the date (day)
+      .map { case (day, sales) => day.toString -> sales.asInstanceOf[Number] }
+      .toMap
   }
 }
 
@@ -51,6 +53,7 @@ class ReportController(
     }
   }
 
+  // Populate the Bar Chart with the data
   private def populateBarChart(startDate: LocalDate, endDate: LocalDate): Unit = {
     salesByMonthChart.getData.clear()
     salesByMonthChart.setTitle(s"Daily Sales Summary (${startDate} to ${endDate})")
@@ -60,7 +63,7 @@ class ReportController(
     val series = new XYChart.Series[String, Number]()
     series.setName(s"Total Sales: RM$totalSales")
 
-    salesData.getData.foreach { case (day, sales) =>
+    salesData.getData.toSeq.sortBy(_._1).foreach { case (day, sales) =>
       series.getData.add(XYChart.Data(day, sales))
     }
 
@@ -69,6 +72,7 @@ class ReportController(
 
   }
 
+  // Populate the Pie Chart with the data
   private def populateTopSalesPieChart(startDate: LocalDate, endDate: LocalDate): Unit = {
     topSalesPieChart.getData.clear()
     topSalesPieChart.setTitle(s"Top 8 Most Popular Products (${startDate} to ${endDate})")
@@ -76,6 +80,7 @@ class ReportController(
     populatePieChart(topSalesPieChart, topSalesData)
   }
 
+  // Populate the Line Chart with the data
   private def populateSalesTrendChart(startDate: LocalDate, endDate: LocalDate): Unit = {
     salesTrendChart.getData.clear()
     salesTrendChart.setTitle(s"Sales Trend (${startDate} to ${endDate})")
@@ -85,13 +90,14 @@ class ReportController(
     val series = new XYChart.Series[String, Number]()
     series.setName(s"Total Day(s) Filtered: $totalDays")
 
-    salesData.getData.foreach { case (day, sales) =>
+    salesData.getData.toSeq.sortBy(_._1).foreach { case (day, sales) =>
       series.getData.add(XYChart.Data(day, sales))
     }
 
     salesTrendChart.getData.setAll(series)
   }
 
+  // Populate the Line Chart with the data
   private def populateChart[X, Y](chart: XYChart[X, Y], data: ChartData[X, Y]): Unit = {
     val series = new XYChart.Series[X, Y]()
     series.setName("Total Sales")
@@ -103,6 +109,7 @@ class ReportController(
     chart.getData.setAll(series)
   }
 
+  // Populate the Pie Chart with the data
   private def populatePieChart(chart: PieChart, data: ChartData[String, Number]): Unit = {
     data.getData.foreach { case (name, quantity) =>
       val pieData = PieChart.Data(s"$name (${quantity.intValue()})", quantity.doubleValue())
@@ -111,6 +118,7 @@ class ReportController(
     chart.setLegendVisible(false)
   }
 
+  // Get the current month date range
   private def getCurrentMonthDateRange: (LocalDate, LocalDate) = {
     val startDate = LocalDate.now().`with`(TemporalAdjusters.firstDayOfMonth())
     val endDate = LocalDate.now().`with`(TemporalAdjusters.lastDayOfMonth())
