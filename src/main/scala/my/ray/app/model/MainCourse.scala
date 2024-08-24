@@ -1,6 +1,7 @@
 package my.ray.app.model
 
 import scalafx.scene.image.Image
+import scalafx.scene.media.Media
 
 class MainCourse(
                   _id: String,
@@ -11,7 +12,6 @@ class MainCourse(
                   _imagePath: Image,
                   _status: String
                 ) extends Product(_id, _name, _price, _description, _stock, _imagePath, _status) with Consumable {
-
 }
 
 object MainCourse {

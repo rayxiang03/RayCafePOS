@@ -257,19 +257,19 @@ class LoginController(
     }
   }
 
-  def isValidEmail(email: String): Boolean = {
+  private def isValidEmail(email: String): Boolean = {
     email.matches("^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")
   }
 
-  def isValidPassword(password: String): Boolean = {
+  private def isValidPassword(password: String): Boolean = {
     password.length >= 8
   }
 
-  def validateCredentials(email: String, password: String): Option[User] = {
+  private def validateCredentials(email: String, password: String): Option[User] = {
     User.findByEmail(email).filter(_.password == password)
   }
 
-  def showSuccessAlert(userName: String): Unit = {
+  private def showSuccessAlert(userName: String): Unit = {
     val alert = new Alert(AlertType.Information) {
       initOwner(null)
       title = "Login Successful"

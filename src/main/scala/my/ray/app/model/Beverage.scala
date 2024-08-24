@@ -2,6 +2,7 @@ package my.ray.app.model
 
 import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalafx.scene.image.Image
+import scalafx.scene.media.Media
 
 
 class Beverage(
@@ -13,7 +14,6 @@ class Beverage(
                 _imagePath: Image,
                 _status: String
               ) extends Product(_id, _name, _price, _description, _stock, _imagePath, _status) with Consumable {
-
 }
 
 // Companion object for Beverage

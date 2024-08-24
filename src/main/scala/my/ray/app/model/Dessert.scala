@@ -2,6 +2,7 @@ package my.ray.app.model
 
 import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalafx.scene.image.Image
+import scalafx.scene.media.Media
 
 class Dessert(
                _id: String,

@@ -5,6 +5,7 @@ import scalikejdbc._
 import scala.util.{Failure, Try}
 import my.ray.app.util.Database
 import scalafx.scene.image.Image
+import scalafx.scene.media.Media
 
 class Salad(
              _id: String,
@@ -15,7 +16,6 @@ class Salad(
              _imagePath: Image,
              _status: String
              ) extends Product(_id, _name, _price, _description, _stock, _imagePath, _status) with Consumable {
-
 }
 
 object Salad {

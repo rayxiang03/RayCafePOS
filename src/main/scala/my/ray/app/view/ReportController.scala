@@ -4,7 +4,6 @@ import my.ray.app.model.OrderTransaction
 import scalafx.scene.chart.{BarChart, LineChart, PieChart, XYChart}
 import scalafx.scene.control.DatePicker
 import scalafxml.core.macros.sfxml
-
 import java.time.LocalDate
 import java.time.temporal.TemporalAdjusters
 

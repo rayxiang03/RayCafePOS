@@ -4,7 +4,6 @@ import scalafx.beans.property.{ObjectProperty, StringProperty}
 import scalikejdbc._
 import java.sql.SQLException
 import java.time.LocalDateTime
-import java.util.UUID
 import scala.util.{Failure, Success, Try}
 
 case class User(
