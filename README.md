@@ -6,13 +6,14 @@
 
 <h2>Project Screenshots:</h2>
 <h3>Login Page</h3>
-![Login Screen](assets/login-page.gif)
+<img src="assets/login-page.gif" alt="Login Screen" width="800"/>
 
 <h3>Menu Page</h3>
-![Menu Screen](assets/menu-page.png)
+<img src="assets/menu-page.png" alt="Menu Screen" width="800"/>
 
 <h3>Order Page</h3>
-![Order Screen](assets/order-page.png)
+<img src="assets/order-page.png" alt="Order Screen" width="800"/>
+
   
 <h2>🧐 Features</h2>
 
