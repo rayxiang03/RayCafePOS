@@ -6,7 +6,7 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="assets/login-page.gif" alt="project-screenshot" width="400" height="400/">
+![Login Screen](assets/login-page.gif)
   
 <h2>🧐 Features</h2>
 
