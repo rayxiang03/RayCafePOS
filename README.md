@@ -64,3 +64,8 @@ cd RayCafePOS
 ```
 - Ensure your database credentials match those defined in the application configuration.
 ```
+
+## Media Content Usage
+Some images and videos used in this project were sourced from external websites (e.g., "Secret Recipe" and other online sources). These media files are subject to their respective copyright and licensing terms. The use of these files within this project is solely for demonstration and educational purposes. Please ensure that any redistribution or commercial use of this project properly respects the licensing terms for these media assets.
+
+If you intend to use or modify the media content in this project, please review the terms and conditions of the original content providers and ensure you have the proper rights to do so.
