@@ -2,7 +2,15 @@
 
 <p align="center"><img src="https://socialify.git.ci/rayxiang03/RayCafePOS/image?font=Inter&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Signal&amp;stargazers=1&amp;theme=Auto" alt="project-image"></p>
 
+![GitHub License](https://img.shields.io/github/license/rayxiang03/RayCafePOS)
+![Version](https://img.shields.io/badge/version-1.0.1%20(Beta)-blue.svg)
+![Java](https://img.shields.io/badge/Java-8-blue.svg)
+![Scala](https://img.shields.io/badge/Scala-2.12.19-red.svg)
+![ScalaFX](https://img.shields.io/badge/ScalaFX-8.0.192--R14-brightgreen.svg)
+![Last Updated](https://img.shields.io/badge/Last%20Updated-24%20Aug%202024-informational)
+
 <p id="description">Ray’s Cafe POS &amp; Management System is a ScalaFX-based desktop application designed for café administrators and staff to manage daily operations efficiently. Built using Scala 2.12 and Java 8 the system offers a user-friendly interface for handling orders managing tables tracking order history and generating business reports. This all-in-one solution streamlines the workflow within café environments especially in high-traffic areas like campuses by reducing manual errors and providing tools for real-time decision-making. The project emphasizes object-oriented programming principles including inheritance and polymorphism as part of the academic requirements.</p>
+
 
 <h2>Project Screenshots:</h2>
 <h3>Login Page</h3>
