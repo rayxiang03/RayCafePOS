@@ -55,7 +55,3 @@ cd RayCafePOS
 ```
 - Ensure your database credentials match those defined in the application configuration.
 ```
-
-<h2>Project Screenshots:</h2>
-
-<img src="https://imailsunwayedu-my.sharepoint.com/:i:/g/personal/23107527_imail_sunway_edu_my/EVIxGsmGySBBtJhM-2N9OZ4Ba0n-QFVSQ7amxAK4kZpnOg?e=KNGSsF" alt="project-screenshot" width="100" height="100/">
