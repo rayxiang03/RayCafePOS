@@ -4,7 +4,9 @@
 
 <p id="description">Ray’s Cafe POS &amp; Management System is a ScalaFX-based desktop application designed for café administrators and staff to manage daily operations efficiently. Built using Scala 2.12 and Java 8 the system offers a user-friendly interface for handling orders managing tables tracking order history and generating business reports. This all-in-one solution streamlines the workflow within café environments especially in high-traffic areas like campuses by reducing manual errors and providing tools for real-time decision-making. The project emphasizes object-oriented programming principles including inheritance and polymorphism as part of the academic requirements.</p>
 
-  
+<h2>Project Screenshots:</h2>
+
+<img src="assets/login-page.gif" alt="project-screenshot" width="400" height="400/">
   
 <h2>🧐 Features</h2>
 
