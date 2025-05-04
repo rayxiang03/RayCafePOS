@@ -55,9 +55,3 @@ cd RayCafePOS
 ```
 - Ensure your database credentials match those defined in the application configuration.
 ```
-
-  
-  
-<h2>💻 Built with</h2>
-
-Technologies used in the project:
